@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#010F47"
+    tools:context=".SafetyStatusActivity">
+
+    <!-- Title TextView -->
+
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/circular_background"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="Safety Status"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <!-- Current Safety Status TextView -->
+
+    <!-- Current Location Map Placeholder -->
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titleTextView"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="-62.5dp"
+        app:srcCompat="@drawable/ic_more_vertical" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titleTextView"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="325dp"
+        app:srcCompat="@drawable/ic_arrow_left" />
+
+    <View
+        android:id="@+id/safetyStatusPlaceholder"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:layout_below="@id/titleTextView"
+        android:layout_marginTop="70dp"
+        android:background="@android:color/darker_gray" />
+
+    <!-- Button Row for Check In and View Safety Zones -->
+    <LinearLayout
+        android:id="@+id/topRowButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/safetyStatusPlaceholder"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/checkInButton"
+            android:layout_width="139dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="#1D09F5"
+            android:text="Check In" />
+
+        <Button
+            android:id="@+id/viewSafetyZonesButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="#1D09F5"
+            android:text="View Safety Zones" />
+    </LinearLayout>
+
+    <!-- View Incident Button -->
+
+    <LinearLayout
+        android:id="@+id/middleRowButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topRowButtons"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/viewIncidentButton"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:backgroundTint="#1D09F5"
+            android:text="View Incident" />
+
+        <Button
+            android:id="@+id/recordIncidentButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="1dp"
+            android:backgroundTint="#1D09F5"
+            android:text="Record Incident" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/bottomRowButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/middleRowButtons"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/autoNotificationsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-10dp"
+            android:layout_marginTop="1dp"
+            android:backgroundTint="#1D09F5"
+            android:text="Automatic Notifications" />
+    </LinearLayout>
+
+
+    <!-- Bottom Navigation Bar -->
+</RelativeLayout>

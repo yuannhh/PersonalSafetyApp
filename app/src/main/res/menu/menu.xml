@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home_border"
+        android:title="Home"/>
+
+    <item
+        android:id="@+id/nav_weather_updates"
+        android:icon="@drawable/ic_weather_border"
+        android:title="Weather"/>
+
+    <item
+        android:id="@+id/nav_contacts"
+        android:icon="@drawable/ic_contacts_border"
+        android:title="Contacts"/>
+
+    <item
+        android:id="@+id/nav_offline_mode"
+        android:icon="@drawable/ic_offline_border"
+        android:title="Offline"/>
+
+    <item
+        android:id="@+id/nav_emergency_mode"
+        android:icon="@drawable/ic_emergency_border"
+        android:title="Emergency"/>
+</menu>
