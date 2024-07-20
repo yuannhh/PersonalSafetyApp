@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/safetyStatusFragment">
+
+    <fragment
+        android:id="@+id/safetyStatusFragment"
+        android:name="com.mobdeve.s12.grp4.personalsafetyapp.SafetyStatusFragment"
+        tools:layout="@layout/activity_safety_status" />
+
+    <fragment
+        android:id="@+id/checkInFragment"
+        android:name="com.mobdeve.s12.grp4.personalsafetyapp.CheckInFragment"
+        tools:layout="@layout/activity_check_in" />
+
+    <fragment
+        android:id="@+id/viewSafetyZonesFragment"
+        android:name="com.mobdeve.s12.grp4.personalsafetyapp.SafetyZonesFragment"
+        tools:layout="@layout/safety_zones" />
+
+    <fragment
+        android:id="@+id/viewIncidentFragment"
+        android:name="com.mobdeve.s12.grp4.personalsafetyapp.ViewIncidentFragment"
+        tools:layout="@layout/view_incident" />
+
+    <fragment
+        android:id="@+id/recordIncidentFragment"
+        android:name="com.mobdeve.s12.grp4.personalsafetyapp.RecordIncidentFragment"
+        tools:layout="@layout/activity_record_incident" />
+
+    <fragment
+        android:id="@+id/autoNotificationsFragment"
+        android:name="com.mobdeve.s12.grp4.personalsafetyapp.AutoNotificationsFragment"
+        tools:layout="@layout/auto_notifs" />
+
+
+</navigation>
+
+<!-- check relation of id -->

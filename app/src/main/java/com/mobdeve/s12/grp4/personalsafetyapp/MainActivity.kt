@@ -1,6 +1,7 @@
 package com.mobdeve.s12.grp4.personalsafetyapp
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -19,10 +20,11 @@ class MainActivity : AppCompatActivity() {
             setupBottomNavigation()
         }
     }
-    
+
     private fun setupBottomNavigation() {
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
-        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            Log.d("MainActivity", "Navigation item selected: ${item.itemId}")
             var selectedFragment: Fragment? = null
             when (item.itemId) {
                 R.id.nav_home -> {
@@ -40,14 +42,13 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_emergency_mode -> {
                     selectedFragment = EmergencyFragment()
                 }
-
-                // Add other fragments similarly
             }
-            if (selectedFragment != null) {
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, selectedFragment)
-                    .commit()
-            }
+//            if (selectedFragment != null) {
+//                Log.d("MainActivity", "Replacing fragment: ${selectedFragment.javaClass.simpleName}")
+//                supportFragmentManager.beginTransaction()
+//                    .replace(R.id.nav_host_fragment, selectedFragment)
+//                    .commit()
+//            }
             true
         }
 
