@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#010F47"
+    tools:context=".AddSafetyZonesActivity">
+
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/circular_background"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="Safety Zones"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#010F47" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titleTextView"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="-52.5dp"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/ic_more_vertical" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titleTextView"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="355dp"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/ic_arrow_left" />
+
+    <TextView
+        android:id="@+id/existSafetyZones"
+        android:layout_width="306dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="140dp"
+        android:layout_marginEnd="80dp"
+        android:background="@drawable/ic_circular_background"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Add Safety Zones"
+        android:textStyle="bold"
+        android:textColor="#010F47"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/nameSafetyZone"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="230dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/ic_input"
+        android:textColor="#0A1A45"
+        android:padding="10dp"
+        android:textSize="16sp"
+        android:gravity="center" />
+
+    <EditText
+        android:id="@+id/addressLine"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nameSafetyZone"
+        android:layout_marginStart="55dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/ic_input"
+        android:textColor="#0A1A45"
+        android:padding="10dp"
+        android:textSize="16sp"
+        android:gravity="center" />
+
+    <EditText
+        android:id="@+id/city"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addressLine"
+        android:layout_marginStart="55dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/ic_input"
+        android:textColor="#0A1A45"
+        android:padding="10dp"
+        android:textSize="16sp"
+        android:gravity="center" />
+
+    <EditText
+        android:id="@+id/stateProvince"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/city"
+        android:layout_marginStart="55dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/ic_input"
+        android:textColor="#0A1A45"
+        android:padding="10dp"
+        android:textSize="16sp"
+        android:gravity="center" />
+
+    <EditText
+        android:id="@+id/country"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/stateProvince"
+        android:layout_marginStart="55dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/ic_input"
+        android:textColor="#0A1A45"
+        android:padding="10dp"
+        android:textSize="16sp"
+        android:gravity="center" />
+
+    <Button
+        android:id="@+id/addSafetyZoneButton"
+        android:layout_below="@id/country"
+        android:layout_width="168dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="125dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="#1D09F5"
+        android:text="Add Safety Zone"
+        android:textSize="15sp" />
+</RelativeLayout>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#010F47"
-    tools:context=".SafetyZonesActivity">
+    tools:context=".DeleteNotificationsActivity">
 
     <TextView
         android:id="@+id/titleTextView"
@@ -18,7 +18,7 @@
         android:background="@drawable/circular_background"
         android:gravity="center"
         android:padding="8dp"
-        android:text="Safety Zones"
+        android:text="Automatic Notifications"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="#010F47" />
@@ -53,72 +53,71 @@
         android:background="@drawable/ic_circular_background"
         android:gravity="center"
         android:padding="10dp"
-        android:text="Existing Safety Zones"
+        android:text="Delete Notifications"
         android:textStyle="bold"
         android:textColor="#010F47"
         android:textSize="20sp"/>
 
-    <TextView
-        android:id="@+id/existSafetyZonesAddress"
+    <LinearLayout
+        android:id="@+id/topRow1"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
+        android:layout_height="wrap_content" >
+
+        <EditText
+            android:id="@+id/notifications1"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="29dp"
+            android:layout_marginTop="230dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/ic_input"
+            android:textColor="#0A1A45"
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:gravity="center" />
+
+        <View
+            android:layout_width="36dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="233dp"
+            android:background="@drawable/ic_delete" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/topRow2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topRow1" >
+
+        <EditText
+            android:id="@+id/notifications2"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="29dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/ic_input"
+            android:textColor="#0A1A45"
+            android:padding="10dp"
+            android:textSize="16sp"
+            android:gravity="center" />
+
+        <View
+            android:layout_width="36dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="30dp"
+            android:background="@drawable/ic_delete" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/saveChangesButton"
+        android:layout_below="@id/topRow2"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="230dp"
-        android:layout_marginEnd="30dp"
-        android:background="@drawable/ic_circular_background_longer"
-        android:gravity="center"
-        android:padding="8dp"
-        android:textStyle="bold"
-        android:text="HOME - Newton Street, Makati\nSCHOOL - Escoda Street, Manila\nOFFICE - Galileo Street, Makati"
-        android:textColor="#010F47"
-        android:textSize="18sp"/>
-
-    <LinearLayout
-        android:id="@+id/topRowButtons"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/existSafetyZonesAddress"
         android:layout_marginTop="20dp"
-        android:gravity="start"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/addNewZoneButton"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="56dp"
-            android:layout_marginEnd="8dp"
-            android:backgroundTint="#00FF00"
-            android:text="Add New Zone"
-            android:textSize="15sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/middleRowButtons"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/topRowButtons"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/editButton"
-            android:layout_width="139dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:backgroundTint="#1D09F5"
-            android:text="Edit"
-            android:textSize="15sp" />
-
-        <Button
-            android:id="@+id/viewSafetyZonesButton"
-            android:layout_width="139dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:backgroundTint="#1D09F5"
-            android:text="Delete"
-            android:textSize="15sp" />
-    </LinearLayout>
-
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="#1D09F5"
+        android:text="Save Changes"
+        android:textSize="15sp" />
 </RelativeLayout>

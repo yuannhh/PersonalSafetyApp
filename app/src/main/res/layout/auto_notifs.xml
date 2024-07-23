@@ -1,13 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="#010F47"
+    tools:context=".AutoNotificationsActivity">
 
     <TextView
+        android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Auto Notifications"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/circular_background"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="Automatic Notifications"
         android:textSize="24sp"
-        android:layout_centerInParent="true"/>
+        android:textStyle="bold"
+        android:textColor="#010F47" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titleTextView"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="-52.5dp"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/ic_more_vertical" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titleTextView"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="355dp"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/ic_arrow_left" />
+
+    <TextView
+        android:id="@+id/existSafetyZonesAddress"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/ic_circular_background_longer"
+        android:gravity="left"
+        android:padding="13dp"
+        android:textStyle="bold"
+        android:text="Notification Settings:"
+        android:textColor="#010F47"
+        android:textSize="18sp"/>
+
+    <LinearLayout
+        android:id="@+id/topRowButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/existSafetyZonesAddress"
+        android:layout_marginTop="20dp"
+        android:gravity="start"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/addNewZoneButton"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="56dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="#00FF00"
+            android:text="Add Notifications"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/middleRowButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topRowButtons"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/editButton"
+            android:layout_width="139dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="#1D09F5"
+            android:text="Edit"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/viewSafetyZonesButton"
+            android:layout_width="139dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="#1D09F5"
+            android:text="Delete"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/instructionsForUse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Instructions for Use"
+        android:textSize="16sp"
+        android:textColor="#D4D2F8"
+        android:layout_below="@id/middleRowButtons"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="15dp" />
+
+    <TextView
+        android:id="@+id/autoNotiInstructions"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:layout_below="@id/instructionsForUse"
+        android:background="@drawable/ic_circular_background_longer"
+        android:gravity="left"
+        android:padding="13dp"
+        android:textStyle="bold"
+        android:text="Adding a New Notification
+        Select 'Add Notification': Click on the Add Notification button.
+        Set Notification Frequency: Choose how often you want to receive notifications.
+        Confirm Settings: Once you have chosen the desired settings, save your changes by confirming your selection.
+
+        Editing an Existing Notification
+        Select Notification to Edit: From the list of existing notifications, choose the one you wish to modify.
+        Make Necessary Changes: Adjust the frequency or time settings as needed.
+        Save Changes: Confirm and save your updated notification settings.
+
+        Deleting a Notification
+        Select Notification to Delete: Identify the notification you want to remove from your list.
+        Click 'Delete': Confirm the deletion by selecting the Delete option."
+        android:textColor="#010F47"
+        android:textSize="12sp"/>
 </RelativeLayout>

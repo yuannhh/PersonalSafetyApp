@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#010F47"
-    tools:context=".CheckInActivity">
+    tools:context=".ConfirmedCheckInActivity">
 
     <TextView
         android:id="@+id/titleTextView"
@@ -44,14 +44,17 @@
         app:srcCompat="@drawable/ic_arrow_left" />
 
     <Button
-        android:id="@+id/unconfirmedButton"
+        android:id="@+id/confirmedButton"
         android:layout_width="250dp"
         android:layout_height="60dp"
         android:layout_marginStart="85dp"
         android:layout_marginTop="160dp"
-        android:backgroundTint="#1D09F5"
-        android:text="Confirm Check-In"
-        android:textSize="21sp" />
+        android:backgroundTint="#00FF00"
+        android:drawableStart="@drawable/ic_check_small"
+        android:text="Confirmed"
+        android:drawablePadding="8dp"
+        android:textSize="21sp"
+        android:gravity="center" />
 
     <TextView
         android:id="@+id/existingTime"
@@ -59,7 +62,7 @@
         android:layout_height="90dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
-        android:layout_below="@id/unconfirmedButton"
+        android:layout_below="@id/confirmedButton"
         android:layout_marginEnd="30dp"
         android:background="@drawable/ic_circular_background_longer"
         android:gravity="center"

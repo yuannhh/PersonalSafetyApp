@@ -27,6 +27,7 @@
         android:textColor="#D4D2F8" />
 
     <EditText
+        android:id="@+id/emailEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -44,13 +45,14 @@
         android:textSize="16sp" />
 
     <EditText
+        android:id="@+id/passwordEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:layout_marginBottom="24dp"
         android:background="#B1ACEC"
         android:textColor="#0A1A45"
-         />
+        />
 
     <!-- Log In and Forgot Password Buttons -->
     <LinearLayout
@@ -82,6 +84,7 @@
 
     <!-- Register Button -->
     <Button
+        android:id="@+id/registerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Register"

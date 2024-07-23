@@ -26,11 +26,11 @@
         android:textColor="#D4D2F8" />
 
     <EditText
+        android:id="@+id/fullNameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:background="#B1ACEC"
-
         android:textColor="#0A1A45" />
 
     <!-- Date of Birth TextView and EditText -->
@@ -42,13 +42,13 @@
         android:textColor="#D4D2F8" />
 
     <EditText
+        android:id="@+id/dobEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="date"
         android:layout_marginBottom="16dp"
         android:background="#B1ACEC"
-        android:textColor="#0A1A45"
-         />
+        android:textColor="#0A1A45" />
 
     <!-- Email TextView and EditText -->
     <TextView
@@ -59,6 +59,7 @@
         android:textColor="#D4D2F8" />
 
     <EditText
+        android:id="@+id/emailEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -74,13 +75,13 @@
         android:textColor="#D4D2F8" />
 
     <EditText
+        android:id="@+id/passwordEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:layout_marginBottom="24dp"
         android:background="#B1ACEC"
-        android:textColor="#0A1A45"
-        />
+        android:textColor="#0A1A45" />
 
     <!-- Register and Back to Login Buttons -->
     <LinearLayout
@@ -91,6 +92,7 @@
         android:layout_marginTop="16dp">
 
         <Button
+            android:id="@+id/registerButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -100,6 +102,7 @@
             android:textColor="#D4D2F8" />
 
         <Button
+            android:id="@+id/backButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
