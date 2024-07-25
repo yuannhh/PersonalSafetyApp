@@ -1,0 +1,67 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#001A66"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tvOfflineMode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Offline Mode"
+        android:textSize="24sp"
+        android:textColor="#ECE6FF"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/border"
+        android:padding="8dp"/>
+
+    <Button
+        android:id="@+id/btnOffline"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="OFFLINE"
+        android:backgroundTint="#4C00CC"
+        android:textColor="#ECE6FF"
+        app:layout_constraintTop_toBottomOf="@+id/tvOfflineMode"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/border"
+        android:padding="8dp"/>
+
+    <TextView
+        android:id="@+id/tvInstructions"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Instructions for use"
+        android:textSize="18sp"
+        android:textColor="#ECE6FF"
+        app:layout_constraintTop_toBottomOf="@+id/btnOffline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:background="@drawable/border"
+        android:padding="8dp"/>
+
+    <TextView
+        android:id="@+id/tvDetails"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Enabling Offline Mode:\n\nAutomatic Activation: App switches to Offline Mode when internet is lost, indicated by an offline icon in the top-right corner.\n\nReceiving Notifications:\n\n- Offline Notifications: Important notifications appear in a muted bubble at the bottom of the screen.\n- View and Dismiss: Tap the bubble to view, swipe to dismiss.\n\nReturning to Online Mode:\n\n- Automatic Reconnection: App switches back to Online Mode when internet is restored, offline icon disappears.\n\nCheck Connection: Ensure internet connection for real-time updates.\n\nEmergency Contacts: Keep contacts updated.\nStay Informed: Use other means to stay updated on severe weather or emergencies."
+        android:textSize="14sp"
+        android:textColor="#ECE6FF"
+        app:layout_constraintTop_toBottomOf="@+id/tvInstructions"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="16dp"
+        android:background="@drawable/border"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
