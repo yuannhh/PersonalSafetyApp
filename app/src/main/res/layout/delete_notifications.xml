@@ -1,123 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#010F47"
-    tools:context=".DeleteNotificationsActivity">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <TextView
-        android:id="@+id/titleTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="30dp"
-        android:background="@drawable/circular_background"
-        android:gravity="center"
-        android:padding="8dp"
-        android:text="Automatic Notifications"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="#010F47" />
-
-    <ImageButton
-        android:id="@+id/imageButton3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/titleTextView"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="-52.5dp"
-        android:background="@android:color/transparent"
-        app:srcCompat="@drawable/ic_more_vertical" />
-
-    <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/titleTextView"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="355dp"
-        android:background="@android:color/transparent"
-        app:srcCompat="@drawable/ic_arrow_left" />
-
-    <TextView
-        android:id="@+id/existSafetyZones"
-        android:layout_width="306dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="140dp"
-        android:layout_marginEnd="80dp"
-        android:background="@drawable/ic_circular_background"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="Delete Notifications"
-        android:textStyle="bold"
-        android:textColor="#010F47"
-        android:textSize="20sp"/>
-
-    <LinearLayout
-        android:id="@+id/topRow1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <EditText
-            android:id="@+id/notifications1"
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="29dp"
-            android:layout_marginTop="230dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/ic_input"
-            android:textColor="#0A1A45"
-            android:padding="10dp"
-            android:textSize="16sp"
-            android:gravity="center" />
-
-        <View
-            android:layout_width="36dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="233dp"
-            android:background="@drawable/ic_delete" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/topRow2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/topRow1" >
+        android:text="Select a notification to delete:"
+        android:textSize="16sp"
+        android:textColor="@android:color/black" />
 
-        <EditText
-            android:id="@+id/notifications2"
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="29dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/ic_input"
-            android:textColor="#0A1A45"
-            android:padding="10dp"
-            android:textSize="16sp"
-            android:gravity="center" />
-
-        <View
-            android:layout_width="36dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="30dp"
-            android:background="@drawable/ic_delete" />
-    </LinearLayout>
+    <ListView
+        android:id="@+id/notificationsListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp" />
 
     <Button
-        android:id="@+id/saveChangesButton"
-        android:layout_below="@id/topRow2"
-        android:layout_width="150dp"
+        android:id="@+id/deleteSelectedButton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:backgroundTint="#1D09F5"
-        android:text="Save Changes"
-        android:textSize="15sp" />
-</RelativeLayout>
+        android:text="Delete Selected"
+        android:textColor="@android:color/white"
+        android:background="@color/colorAccent" />
+
+</LinearLayout>

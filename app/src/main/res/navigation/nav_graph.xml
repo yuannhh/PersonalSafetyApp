@@ -2,27 +2,90 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/safetyStatusFragment">
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.mobdeve.s12.grp4.personalsafetyapp.LoginFragment"
+        tools:layout="@layout/login" />
 
     <fragment
         android:id="@+id/safetyStatusFragment"
         android:name="com.mobdeve.s12.grp4.personalsafetyapp.SafetyStatusFragment"
-        tools:layout="@layout/activity_safety_status" />
+        tools:layout="@layout/activity_safety_status">
+        <action
+            android:id="@+id/action_safetyStatusFragment_to_checkInFragment"
+            app:destination="@id/checkInFragment" />
+        <action
+            android:id="@+id/action_safetyStatusFragment_to_viewSafetyZonesFragment"
+            app:destination="@id/viewSafetyZonesFragment" />
+        <action
+            android:id="@+id/action_safetyStatusFragment_to_viewIncidentFragment"
+            app:destination="@id/viewIncidentFragment" />
+        <action
+            android:id="@+id/action_safetyStatusFragment_to_recordIncidentFragment"
+            app:destination="@id/recordIncidentFragment" />
+        <action
+            android:id="@+id/action_safetyStatusFragment_to_autoNotificationsFragment"
+            app:destination="@id/autoNotificationsFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/checkInFragment"
         android:name="com.mobdeve.s12.grp4.personalsafetyapp.CheckInFragment"
-        tools:layout="@layout/activity_check_in" />
+        tools:layout="@layout/activity_check_in">
+        <action
+            android:id="@+id/action_CheckInFragment_to_FullMapFragment"
+            app:destination="@id/fullMapFragment" />
+        <action
+            android:id="@+id/action_CheckInFragment_to_safetyStatusFragment"
+            app:destination="@id/safetyStatusFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fullMapFragment"
+        android:name="com.mobdeve.s12.grp4.personalsafetyapp.FullMapFragment"
+        tools:layout="@layout/fragment_full_map">
+        <action
+            android:id="@+id/action_FullMapFragment_to_CheckInFragment"
+            app:destination="@id/checkInFragment" />
+        <action
+            android:id="@+id/action_FullMapFragment_to_safetyStatusFragment"
+            app:destination="@id/safetyStatusFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/viewSafetyZonesFragment"
         android:name="com.mobdeve.s12.grp4.personalsafetyapp.SafetyZonesFragment"
-        tools:layout="@layout/safety_zones" />
+        tools:layout="@layout/safety_zones">
+        <action
+            android:id="@+id/action_viewSafetyZonesFragment_to_safetyStatusFragment"
+            app:destination="@id/safetyStatusFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/viewIncidentFragment"
         android:name="com.mobdeve.s12.grp4.personalsafetyapp.ViewIncidentFragment"
-        tools:layout="@layout/view_incident" />
+        tools:layout="@layout/view_incident">
+        <action
+            android:id="@+id/action_viewIncidentFragment_to_safetyStatusFragment"
+            app:destination="@id/safetyStatusFragment" />
+        <action
+            android:id="@+id/action_viewIncidentFragment_to_viewAlarmFragment"
+            app:destination="@id/viewAlarmFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/viewAlarmFragment"
+        android:name="com.mobdeve.s12.grp4.personalsafetyapp.ViewAlarmFragment"
+        tools:layout="@layout/view_alarm">
+        <action
+            android:id="@+id/action_viewAlarmFragment_to_viewIncidentFragment"
+            app:destination="@id/viewIncidentFragment" />
+        <action
+            android:id="@+id/action_viewAlarmFragment_to_safetyStatusFragment"
+            app:destination="@id/safetyStatusFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/recordIncidentFragment"
@@ -32,9 +95,10 @@
     <fragment
         android:id="@+id/autoNotificationsFragment"
         android:name="com.mobdeve.s12.grp4.personalsafetyapp.AutoNotificationsFragment"
-        tools:layout="@layout/auto_notifs" />
-
+        tools:layout="@layout/auto_notifs">
+        <action
+            android:id="@+id/action_autoNotificationsFragment_to_safetyStatusFragment"
+            app:destination="@id/safetyStatusFragment" />
+    </fragment>
 
 </navigation>
-
-<!-- check relation of id -->

@@ -5,9 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#010F47"
-    tools:context=".SafetyZonesFragment">
+    tools:context=".ViewAlarmFragment">
 
-    <!-- Title -->
     <TextView
         android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
@@ -19,12 +18,11 @@
         android:background="@drawable/circular_background"
         android:gravity="center"
         android:padding="8dp"
-        android:text="Safety Zones"
+        android:text="Alarm History"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="#010F47" />
 
-    <!-- Navigation Buttons -->
     <ImageButton
         android:id="@+id/imageButton3"
         android:layout_width="wrap_content"
@@ -45,9 +43,8 @@
         android:background="@android:color/transparent"
         app:srcCompat="@drawable/ic_arrow_left" />
 
-    <!-- Existing Safety Zones Title -->
     <TextView
-        android:id="@+id/existSafetyZones"
+        android:id="@+id/listOfAlarms"
         android:layout_width="306dp"
         android:layout_height="50dp"
         android:layout_marginStart="80dp"
@@ -56,63 +53,61 @@
         android:background="@drawable/ic_circular_background"
         android:gravity="center"
         android:padding="10dp"
-        android:text="Existing Safety Zones"
+        android:text="List of Alarms"
         android:textStyle="bold"
         android:textColor="#010F47"
         android:textSize="20sp"/>
 
-    <!-- ViewPager for Safety Zones -->
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPagerSafetyZones"
-        android:layout_width="match_parent"
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/alarmViewPager"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:layout_below="@id/listOfAlarms"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/emptyStateTextView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/existSafetyZones"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"/>
+        android:layout_marginTop="15dp"
+        android:layout_below="@id/listOfAlarms"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/ic_circular_background"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="No alarms available."
+        android:textSize="18sp"
+        android:textColor="#010F47"
+        android:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/buttonLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/viewPagerSafetyZones"
+        android:layout_below="@id/alarmViewPager"
+        android:layout_margin="10dp"
         android:orientation="horizontal"
-        android:padding="16dp">
+        android:gravity="center">
 
         <Button
-            android:id="@+id/addButton"
-            android:layout_width="0dp"
+            android:id="@+id/viewIncidentsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="#00FF00"
+            android:text="View Incidents"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/clearHistoryButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:backgroundTint="#1D09F5"
-            android:text="Add Zone"
-            android:textSize="15sp" />
-
-        <Button
-            android:id="@+id/editButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:backgroundTint="#F5A600"
-            android:text="Edit Zone"
-            android:textSize="15sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/buttonlayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/buttonLayout"
-        android:orientation="horizontal"
-        android:padding="16dp">
-
-        <Button
-            android:id="@+id/deleteButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:backgroundTint="#F51111"
-            android:text="Delete Zone"
-            android:textSize="15sp" />
+            android:text="Clear History"
+            android:textSize="16sp"
+            android:textColor="#FFFFFF" />
     </LinearLayout>
 </RelativeLayout>

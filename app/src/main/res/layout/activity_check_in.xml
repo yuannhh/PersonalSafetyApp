@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#010F47"
-    tools:context=".CheckInActivity">
+    tools:context=".CheckInFragment">
 
     <TextView
         android:id="@+id/titleTextView"
@@ -44,45 +44,87 @@
         app:srcCompat="@drawable/ic_arrow_left" />
 
     <Button
-        android:id="@+id/unconfirmedButton"
+        android:id="@+id/checkInButton"
         android:layout_width="250dp"
         android:layout_height="60dp"
-        android:layout_marginStart="85dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginStart="83dp"
+        android:layout_marginTop="135dp"
         android:backgroundTint="#1D09F5"
         android:text="Confirm Check-In"
         android:textSize="21sp" />
 
+    <Button
+        android:id="@+id/confirmedButton"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="83dp"
+        android:layout_marginTop="135dp"
+        android:backgroundTint="#00FF00"
+        android:drawableStart="@drawable/ic_check_small"
+        android:text="Confirmed"
+        android:drawablePadding="8dp"
+        android:textSize="21sp"
+        android:gravity="center"
+        android:visibility="gone" />
+
     <TextView
         android:id="@+id/existingTime"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
+        android:layout_height="85dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
-        android:layout_below="@id/unconfirmedButton"
+        android:layout_below="@id/checkInButton"
         android:layout_marginEnd="30dp"
         android:background="@drawable/ic_circular_background_longer"
         android:gravity="center"
         android:padding="8dp"
         android:textStyle="bold"
-        android:text="Current Time: 00:50 AM
-                      Saturday,  June 22, 2024 (GMT+8)"
+        android:text="Current Time: 00:50 AM\nSaturday, June 22, 2024 (GMT+8)"
         android:textColor="#010F47"
-        android:textSize="18sp"/>
+        android:textSize="19sp"/>
 
-    <TextView
-        android:id="@+id/geolocation"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_marginStart="30dp"
+    <LinearLayout
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_below="@id/existingTime"
-        android:layout_marginEnd="30dp"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
         android:background="@drawable/ic_circular_background_longer"
-        android:gravity="center"
-        android:padding="8dp"
-        android:textStyle="bold"
-        android:text="Geolocation: CONFIRMED"
-        android:textColor="#010F47"
-        android:textSize="18sp"/>
+        android:padding="8dp">
+
+        <!-- Map Fragment -->
+        <FrameLayout
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="300dp"
+            android:layout_height="250dp">
+
+            <fragment
+                android:id="@+id/mapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:name="com.google.android.gms.maps.SupportMapFragment" />
+
+            <!-- Transparent overlay to detect clicks -->
+            <View
+                android:id="@+id/mapOverlay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/geolocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:text="Geolocation: UNKNOWN"
+            android:textColor="#010F47"
+            android:textSize="18sp"
+            android:layout_marginBottom="10dp" />
+    </LinearLayout>
+
 </RelativeLayout>

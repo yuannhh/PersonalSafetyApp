@@ -19,27 +19,27 @@ class SafetyStatusFragment : Fragment() {
         // Set up buttons and their click listeners
         val checkInButton: Button = view.findViewById(R.id.checkInButton)
         checkInButton.setOnClickListener {
-            findNavController().navigate(R.id.checkInFragment)
+            findNavController().navigate(R.id.action_safetyStatusFragment_to_checkInFragment)
         }
 
         val viewSafetyZonesButton: Button = view.findViewById(R.id.viewSafetyZonesButton)
         viewSafetyZonesButton.setOnClickListener {
-            findNavController().navigate(R.id.viewSafetyZonesFragment)
+            findNavController().navigate(R.id.action_safetyStatusFragment_to_viewSafetyZonesFragment)
         }
 
         val viewIncidentButton: Button = view.findViewById(R.id.viewIncidentButton)
         viewIncidentButton.setOnClickListener {
-            findNavController().navigate(R.id.viewIncidentFragment)
+            findNavController().navigate(R.id.action_safetyStatusFragment_to_viewIncidentFragment)
         }
 
         val recordIncidentButton: Button = view.findViewById(R.id.recordIncidentButton)
         recordIncidentButton.setOnClickListener {
-            findNavController().navigate(R.id.recordIncidentFragment)
+            findNavController().navigate(R.id.action_safetyStatusFragment_to_recordIncidentFragment)
         }
 
         val autoNotificationsButton: Button = view.findViewById(R.id.autoNotificationsButton)
         autoNotificationsButton.setOnClickListener {
-            findNavController().navigate(R.id.autoNotificationsFragment)
+            findNavController().navigate(R.id.action_safetyStatusFragment_to_autoNotificationsFragment)
         }
 
         return view

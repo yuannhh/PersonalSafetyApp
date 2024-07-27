@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#010F47"
-    tools:context=".SafetyStatusActivity">
+    tools:context=".SafetyStatusFragment">
 
     <!-- Title TextView -->
 
@@ -132,7 +132,6 @@
             android:backgroundTint="#1D09F5"
             android:text="Automatic Notifications" />
     </LinearLayout>
-
 
     <!-- Bottom Navigation Bar -->
 </RelativeLayout>

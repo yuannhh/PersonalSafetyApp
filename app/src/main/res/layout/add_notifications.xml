@@ -6,21 +6,21 @@
     android:padding="16dp">
 
     <EditText
-        android:id="@+id/editNotificationEditText"
+        android:id="@+id/notificationEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter new notification text"
+        android:hint="Enter notification text"
         android:inputType="text" />
 
     <EditText
-        android:id="@+id/editIntervalEditText"
+        android:id="@+id/intervalEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter new interval (e.g., 1)"
+        android:hint="Enter interval (e.g., 1)"
         android:inputType="number" />
 
     <Spinner
-        android:id="@+id/editTimeUnitSpinner"
+        android:id="@+id/timeUnitSpinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:entries="@array/time_units" />

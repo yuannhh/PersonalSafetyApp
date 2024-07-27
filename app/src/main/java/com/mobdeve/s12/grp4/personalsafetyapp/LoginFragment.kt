@@ -46,7 +46,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun login(email: String, password: String) {
-        val url = "http://192.168.1.35/mobdeve/login.php" // Use the IP address of your computer
+        val url = "http://192.168.254.128/mobdeve/login.php" // Use the IP address of your computer
 
         val formBody = FormBody.Builder()
             .add("email", email)

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#010F47"
-    tools:context=".AutoNotificationsActivity">
+    tools:context=".AutoNotificationsFragment">
 
     <TextView
         android:id="@+id/titleTextView"
@@ -97,7 +97,7 @@
             android:textSize="15sp" />
 
         <Button
-            android:id="@+id/viewSafetyZonesButton"
+            android:id="@+id/deleteButton"
             android:layout_width="139dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
