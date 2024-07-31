@@ -1,0 +1,47 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0A1F44"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/panic_button_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:padding="10dp"
+        android:background="@drawable/text_border"
+        android:text="PANIC BUTTON"
+        android:textColor="#000000"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/btn_emergency"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_below="@id/panic_button_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#FF0000"
+        android:text="Emergency"
+        android:textColor="#000000"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/instructions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_emergency"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/text_border"
+        android:padding="10dp"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:text="Instructions for use\n\nSend an Alert:\n• Tap the Emergency Button\n• A dialog box will appear asking, 'Are you sure you want to send an alert?'\n• Confirm or Cancel:\n  • Tap 'Confirm' to send the alert.\n  • Tap 'Cancel' to go back and not send the alert.\n\nManaging Emergency Contacts:\n• Access Emergency Contacts: Tap the small gear icon near the Panic Button to open the emergency contacts menu.\n• Modify Contacts:\n  • Add Contact: Enter the details of a new emergency contact (name, phone number, relationship).\n  • Edit Contact: Select an existing contact to update their information.\n  • Remove Contact: Delete any contact from the list.\n• Save Changes: Ensure all changes are saved before closing the emergency contacts menu.\n\nUse Wisely: Only use the Panic Button in actual emergency situations.\n\nCheck Contacts Regularly: Ensure your emergency contacts are up to date.\n\nConfirmation: The confirmation dialog helps prevent accidental alerts." />
+
+</RelativeLayout>
+

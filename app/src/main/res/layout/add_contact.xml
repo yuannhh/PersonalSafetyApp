@@ -1,91 +1,22 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#0A2463"
-    tools:context=".AddContactActivity">
-
-    <TextView
-        android:id="@+id/emergencyContactsTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
-        android:text="Emergency Contacts"
-        android:textSize="24sp"
-        android:textColor="#C0C6F2"
-        android:fontFamily="sans-serif"/>
-
-    <TextView
-        android:id="@+id/newContactTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/emergencyContactsTitle"
-        android:layout_marginTop="10dp"
-        android:layout_centerHorizontal="true"
-        android:text="New Contact"
-        android:textSize="18sp"
-        android:textColor="#C0C6F2"
-        android:fontFamily="sans-serif"/>
-
-    <LinearLayout
-        android:id="@+id/newContactContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/newContactTitle"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:orientation="vertical"
-        />
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <EditText
-        android:id="@+id/contactName"
+        android:id="@+id/edit_text_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Name"
-        android:layout_marginTop="10dp"
-        android:padding="10dp"
-        android:textColor="#0A2463"
-        android:fontFamily="sans-serif"
-        android:background="@drawable/border"
-        />
+        android:hint="Name" />
 
     <EditText
-        android:id="@+id/contactPhoneNumber"
+        android:id="@+id/edit_text_phone_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Phone Number"
-        android:layout_marginTop="10dp"
-        android:padding="10dp"
-        android:textColor="#0A2463"
-        android:fontFamily="sans-serif"
-        android:background="@drawable/border"
-        />
+        android:inputType="phone" />
 
-    <EditText
-        android:id="@+id/contactRelationship"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Relationship"
-        android:layout_marginTop="10dp"
-        android:padding="10dp"
-        android:textColor="#0A2463"
-        android:fontFamily="sans-serif"
-        android:background="@drawable/border"
-        />
-
-    <EditText
-        android:id="@+id/contactAdditionalInfo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Additional Information"
-        android:layout_marginTop="10dp"
-        android:padding="10dp"
-        android:textColor="#0A2463"
-        android:fontFamily="sans-serif"
-        android:background="@drawable/border"
-        />
+</LinearLayout>
 
 
-</RelativeLayout>

@@ -1,0 +1,44 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0A1F44"
+    tools:context=".AlertConfirmationActivity">
+
+    <TextView
+        android:id="@+id/confirmation_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:text="Are you sure you want to send an alert?"
+        android:textColor="#000000"
+        android:background="@drawable/text_border"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/confirmation_text"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btn_confirm"
+            android:layout_width="116dp"
+            android:layout_height="wrap_content"
+            android:background="#C0C0C0"
+            android:text="Confirm"
+            android:textColor="#000000" />
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:background="#C0C0C0"
+            android:text="Cancel"
+            android:textColor="#000000"
+            android:layout_marginStart="20dp" />
+    </LinearLayout>
+</RelativeLayout>

@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
                     selectedFragment = OfflineFragment()
                 }
                 R.id.nav_emergency_mode -> {
-                    selectedFragment = EmergencyFragment()
+                    selectedFragment = PanicButtonFragment()
                 }
             }
             if (selectedFragment != null) {

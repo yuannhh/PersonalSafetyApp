@@ -1,0 +1,67 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0A1F44"
+    tools:context=".ContactsFragment">
+
+    <TextView
+        android:id="@+id/emergency_contacts_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:padding="10dp"
+        android:background="@drawable/text_border"
+        android:text="Emergency Contacts"
+        android:textColor="#000000"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/contacts_list_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/emergency_contacts_text"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="List of Contacts"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:id="@+id/contacts_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/contacts_list_text"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="#FFFFFF">
+        <!-- Dynamic content will be added here -->
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_add_contact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/contacts_list"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="16dp"
+        android:text="Add Contact"
+        android:backgroundTint="#0000FF"
+        android:textColor="#FFFFFF" />
+
+    <Button
+        android:id="@+id/btn_save_changes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_add_contact"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="16dp"
+        android:text="Save Changes"
+        android:backgroundTint="#0000FF"
+        android:textColor="#FFFFFF" />
+
+</RelativeLayout>
+
