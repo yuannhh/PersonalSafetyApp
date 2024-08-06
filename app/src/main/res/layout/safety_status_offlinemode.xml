@@ -1,0 +1,51 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#001A66"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tvSafetyStatus"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Safety Status"
+        android:textSize="24sp"
+        android:textColor="#ECE6FF"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/border"
+        android:padding="8dp"/>
+
+    <TextView
+        android:id="@+id/tvOfflineModeStatus"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="OFFLINE MODE ON"
+        android:textSize="18sp"
+        android:textColor="#ECE6FF"
+        app:layout_constraintTop_toBottomOf="@+id/tvSafetyStatus"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/border"
+        android:padding="8dp"/>
+
+    <Button
+        android:id="@+id/btnMutedNotifications"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Muted Notifications"
+        android:backgroundTint="#4C00CC"
+        android:textColor="#ECE6FF"
+        app:layout_constraintTop_toBottomOf="@+id/tvOfflineModeStatus"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/border"
+        android:padding="8dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

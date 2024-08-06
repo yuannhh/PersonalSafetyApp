@@ -1,9 +1,11 @@
 package com.mobdeve.s12.grp4.personalsafetyapp
 
 data class SafetyZone(
-    var name: String,
-    var addressLine: String,
-    var city: String,
-    var stateProvince: String,
-    var country: String
+    val id: Int,
+    val userId: Int,
+    val name: String,
+    val addressLine: String,
+    val city: String,
+    val state: String,
+    val country: String
 )

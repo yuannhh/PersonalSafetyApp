@@ -11,15 +11,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Check if there's a fragment specified in the intent
-        val fragment = intent.getStringExtra("fragment")
-        if (fragment != null && fragment == "PanicButtonFragment") {
-            loadFragment(PanicButtonFragment())
-        } else {
-            // Initially load the LoginFragment
-            if (savedInstanceState == null) {
-                loadFragment(LoginFragment())
-            }
+        // Initially load the LoginFragment
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.nav_host_fragment, LoginFragment())
+                .commit()
         }
     }
 
@@ -50,18 +46,14 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             if (selectedFragment != null) {
-                loadFragment(selectedFragment)
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.nav_host_fragment, selectedFragment)
+                    .commit()
             }
             true
         }
 
         // Set default selection
         bottomNavigationView.selectedItemId = R.id.nav_home
-    }
-
-    private fun loadFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.nav_host_fragment, fragment)
-            .commit()
     }
 }

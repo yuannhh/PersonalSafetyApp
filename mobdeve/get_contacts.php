@@ -1,22 +1,22 @@
 <?php
-include ‘db_connect.php’;
+include 'db_connect.php';
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+$user_id = $_GET['user_id'] ?? 0;
+
+$sql = "SELECT * FROM contacts WHERE user_id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+$contacts = [];
+while ($row = $result->fetch_assoc()) {
+    $contacts[] = $row;
 }
 
-$sql = "SELECT id, name, phone_number FROM emergency_contacts";
-$result = $conn->query($sql);
+$output = array_map(function($contact) {
+    return implode('|', [$contact['id'], $contact['contact_name'], $contact['contact_phone']]);
+}, $contacts);
 
-$contacts = array();
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        $contacts[] = $row;
-    }
-}
-
-echo json_encode($contacts);
-
-$conn->close();
+echo implode("\n", $output);
 ?>

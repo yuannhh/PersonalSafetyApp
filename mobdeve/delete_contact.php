@@ -1,20 +1,15 @@
 <?php
-include ‘db_connect.php’;
+include 'db_connect.php';
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+$id = $_POST['id'] ?? '';
 
-$id = $_POST['id'];
+$sql = "DELETE FROM contacts WHERE id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $id);
 
-$sql = "DELETE FROM contacts WHERE id=$id";
-
-if ($conn->query($sql) === TRUE) {
-    echo "Record deleted successfully";
+if ($stmt->execute()) {
+    echo "success";
 } else {
-    echo "Error deleting record: " . $conn->error;
+    echo "failure";
 }
-
-$conn->close();
 ?>

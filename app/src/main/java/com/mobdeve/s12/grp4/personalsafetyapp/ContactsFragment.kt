@@ -1,6 +1,7 @@
 package com.mobdeve.s12.grp4.personalsafetyapp
 
 import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,14 +12,13 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
-import org.json.JSONArray
-import org.json.JSONException
 
 class ContactsFragment : Fragment() {
 
     private lateinit var networkHelper: NetworkHelper
     private lateinit var contactsList: LinearLayout
     private val contactsToDelete = mutableListOf<Int>()
+    private var userId: Int = -1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,8 +31,8 @@ class ContactsFragment : Fragment() {
         contactsList = view.findViewById(R.id.contacts_list)
 
         val btnAddContact = view.findViewById<Button>(R.id.btn_add_contact)
-        val btnDeleteContact = view.findViewById<Button>(R.id.btn_delete_contact)
-        val btnEditContact = view.findViewById<Button>(R.id.btn_edit_contact)
+        val btnDeleteContact = view.findViewById<Button>(R.id.btn_add_contact)
+        val btnEditContact = view.findViewById<Button>(R.id.btn_add_contact)
 
         btnAddContact.setOnClickListener {
             showAddContactDialog()
@@ -46,9 +46,15 @@ class ContactsFragment : Fragment() {
             editSelectedContact()
         }
 
+        userId = getLoggedInUserId()
         fetchContacts()
 
         return view
+    }
+
+    private fun getLoggedInUserId(): Int {
+        val sharedPreferences = requireContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+        return sharedPreferences.getInt("user_id", -1)
     }
 
     private fun showAddContactDialog() {
@@ -73,9 +79,13 @@ class ContactsFragment : Fragment() {
     }
 
     private fun addContact(name: String, phoneNumber: String) {
-        networkHelper.addContact(name, phoneNumber, { response ->
+        networkHelper.addContact(userId, name, phoneNumber, { response ->
             Log.d("ContactsFragment", "addContact response: $response")
-            fetchContacts()
+            if (response == "success") {
+                fetchContacts()
+            } else {
+                Log.e("ContactsFragment", "Failed to add contact")
+            }
         }, { error ->
             Log.e("ContactsFragment", "addContact error: $error")
         })
@@ -85,7 +95,11 @@ class ContactsFragment : Fragment() {
         contactsToDelete.forEach { id ->
             networkHelper.deleteContact(id, { response ->
                 Log.d("ContactsFragment", "deleteContact response: $response")
-                fetchContacts()
+                if (response == "success") {
+                    fetchContacts()
+                } else {
+                    Log.e("ContactsFragment", "Failed to delete contact")
+                }
             }, { error ->
                 Log.e("ContactsFragment", "deleteContact error: $error")
             })
@@ -94,7 +108,6 @@ class ContactsFragment : Fragment() {
     }
 
     private fun editSelectedContact() {
-        // For simplicity, we'll show the first contact in the list for editing.
         if (contactsList.childCount > 0) {
             val firstContactView = contactsList.getChildAt(0)
             val nameTextView = firstContactView.findViewById<TextView>(R.id.contact_name)
@@ -108,47 +121,48 @@ class ContactsFragment : Fragment() {
     }
 
     private fun fetchContacts() {
-        networkHelper.getContacts({ response ->
-            try {
-                val contactsArray = JSONArray(response)
-                requireActivity().runOnUiThread {
+        networkHelper.getContacts(userId, { response ->
+            requireActivity().runOnUiThread {
+                try {
                     contactsList.removeAllViews()
-                    for (i in 0 until contactsArray.length()) {
-                        val contact = contactsArray.getJSONObject(i)
-                        val id = contact.getInt("id")
-                        val name = contact.getString("name")
-                        val phoneNumber = contact.getString("phone_number")
+                    val lines = response.split("\n")
+                    for (line in lines) {
+                        val parts = line.split("|")
+                        if (parts.size == 3) {
+                            val id = parts[0].toInt()
+                            val name = parts[1]
+                            val phoneNumber = parts[2]
 
-                        val contactView = LayoutInflater.from(requireContext()).inflate(R.layout.contact_item, null)
-                        contactView.tag = id  // Store contact id as tag
-                        val nameTextView = contactView.findViewById<TextView>(R.id.contact_name)
-                        val phoneTextView = contactView.findViewById<TextView>(R.id.contact_phone)
-                        val deleteButton = contactView.findViewById<Button>(R.id.btn_delete_contact)
-                        val updateButton = contactView.findViewById<Button>(R.id.btn_update_contact)
+                            val contactView = LayoutInflater.from(requireContext()).inflate(R.layout.contact_item, null)
+                            contactView.tag = id
+                            val nameTextView = contactView.findViewById<TextView>(R.id.contact_name)
+                            val phoneTextView = contactView.findViewById<TextView>(R.id.contact_phone)
+                            val deleteButton = contactView.findViewById<Button>(R.id.btn_delete_contact)
+                            val updateButton = contactView.findViewById<Button>(R.id.btn_update_contact)
 
-                        nameTextView.text = name
-                        phoneTextView.text = phoneNumber
+                            nameTextView.text = name
+                            phoneTextView.text = phoneNumber
 
-                        deleteButton.setOnClickListener {
-                            contactsToDelete.add(id)
-                            contactView.visibility = View.GONE
+                            deleteButton.setOnClickListener {
+                                contactsToDelete.add(id)
+                                contactView.visibility = View.GONE
+                            }
+
+                            updateButton.setOnClickListener {
+                                showUpdateContactDialog(id, name, phoneNumber)
+                            }
+
+                            contactsList.addView(contactView)
                         }
-
-                        updateButton.setOnClickListener {
-                            showUpdateContactDialog(id, name, phoneNumber)
-                        }
-
-                        contactsList.addView(contactView)
                     }
+                } catch (e: Exception) {
+                    Log.e("ContactsFragment", "Error parsing contacts response", e)
                 }
-            } catch (e: JSONException) {
-                Log.e("ContactsFragment", "Error parsing contacts response", e)
             }
         }, { error ->
             Log.e("ContactsFragment", "fetchContacts error: $error")
         })
     }
-
 
     private fun showUpdateContactDialog(id: Int, name: String, phoneNumber: String) {
         val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.add_contact, null)
@@ -177,14 +191,13 @@ class ContactsFragment : Fragment() {
     private fun updateContact(id: Int, name: String, phoneNumber: String) {
         networkHelper.updateContact(id, name, phoneNumber, { response ->
             Log.d("ContactsFragment", "updateContact response: $response")
-            fetchContacts()
+            if (response == "success") {
+                fetchContacts()
+            } else {
+                Log.e("ContactsFragment", "Failed to update contact")
+            }
         }, { error ->
             Log.e("ContactsFragment", "updateContact error: $error")
         })
     }
 }
-
-
-
-
-

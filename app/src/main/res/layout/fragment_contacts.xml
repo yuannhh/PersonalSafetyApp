@@ -51,29 +51,4 @@
         android:text="Add Contact"
         android:backgroundTint="#0000FF"
         android:textColor="#FFFFFF" />
-
-    <Button
-        android:id="@+id/btn_delete_contact"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btn_add_contact"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="16dp"
-        android:text="Delete Contact"
-        android:backgroundTint="#FF0000"
-        android:textColor="#FFFFFF" />
-
-    <Button
-        android:id="@+id/btn_edit_contact"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btn_delete_contact"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="16dp"
-        android:text="Edit Contact"
-        android:backgroundTint="#FFA500"
-        android:textColor="#FFFFFF" />
-
 </RelativeLayout>
-
-

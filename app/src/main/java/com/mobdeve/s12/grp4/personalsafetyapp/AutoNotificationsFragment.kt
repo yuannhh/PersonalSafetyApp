@@ -1,213 +1,111 @@
 package com.mobdeve.s12.grp4.personalsafetyapp
 
-import android.app.AlarmManager
-import android.app.PendingIntent
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.EditText
-import android.widget.ListView
-import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import androidx.recyclerview.widget.RecyclerView
+import okhttp3.*
+import org.json.JSONArray
+import java.io.IOException
 
 class AutoNotificationsFragment : Fragment() {
 
-    private lateinit var addNewZoneButton: Button
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var autoNotificationAdapter: AutoNotificationAdapter
+    private lateinit var addButton: Button
     private lateinit var editButton: Button
     private lateinit var deleteButton: Button
-    private lateinit var imageButton2: Button
-    private val alarmManager: AlarmManager by lazy {
-        requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
-    }
-
-    private val notificationsList = mutableListOf<Pair<String, Long>>() // List of notifications with intervals
+    private val client = OkHttpClient()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.auto_notifs, container, false)
-
-        addNewZoneButton = view.findViewById(R.id.addNewZoneButton)
+        val view = inflater.inflate(R.layout.auto_notifis, container, false)
+        recyclerView = view.findViewById(R.id.recyclerViewNotifications)
+        addButton = view.findViewById(R.id.addButton)
         editButton = view.findViewById(R.id.editButton)
         deleteButton = view.findViewById(R.id.deleteButton)
 
-        addNewZoneButton.setOnClickListener {
-            showAddNotificationDialog()
+        val sharedPref = requireActivity().getSharedPreferences("UserPrefs", 0)
+        val userId = sharedPref.getInt("userId", -1)
+        if (userId == -1) {
+            Toast.makeText(context, "User not logged in", Toast.LENGTH_SHORT).show()
+            return view
+        }
+
+        fetchAutoNotifications(userId)
+
+        addButton.setOnClickListener {
+            findNavController().navigate(R.id.action_autoNotificationsFragment_to_addNotificationFragment)
         }
 
         editButton.setOnClickListener {
-            showEditNotificationDialog()
+            findNavController().navigate(R.id.action_autoNotificationsFragment_to_editNotificationFragment)
         }
 
         deleteButton.setOnClickListener {
-            showDeleteNotificationDialog()
-        }
-
-        imageButton2.setOnClickListener {
-            findNavController().navigate(R.id.action_autoNotificationsFragment_to_safetyStatusFragment)
+            findNavController().navigate(R.id.action_autoNotificationsFragment_to_deleteNotificationFragment)
         }
 
         return view
     }
 
-    private fun showAddNotificationDialog() {
-        val builder = MaterialAlertDialogBuilder(requireContext())
-        val view = LayoutInflater.from(requireContext()).inflate(R.layout.add_notifications, null)
-        val notificationEditText = view.findViewById<EditText>(R.id.notificationEditText)
-        val intervalEditText = view.findViewById<EditText>(R.id.intervalEditText)
-        val timeUnitSpinner = view.findViewById<Spinner>(R.id.timeUnitSpinner)
+    private fun fetchAutoNotifications(userIdParam: Int) {
+        val url = "http://192.168.254.128/mobdeve/auto_notifications.php"
 
-        builder.setView(view)
-            .setTitle("Add Notification")
-            .setPositiveButton("Add") { dialog, _ ->
-                val notificationText = notificationEditText.text.toString()
-                val intervalText = intervalEditText.text.toString()
-                val timeUnit = timeUnitSpinner.selectedItem.toString()
+        val formBody = FormBody.Builder()
+            .add("user_id", userIdParam.toString())
+            .build()
 
-                if (notificationText.isNotEmpty() && intervalText.isNotEmpty()) {
-                    val interval = intervalText.toLong()
-                    val timeInMillis = convertToMillis(interval, timeUnit)
-                    notificationsList.add(notificationText to timeInMillis)
-                    scheduleNotification(notificationText, timeInMillis)
-                    Toast.makeText(requireContext(), "Notification Scheduled", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(requireContext(), "Please enter all fields", Toast.LENGTH_SHORT).show()
+        val request = Request.Builder()
+            .url(url)
+            .post(formBody)
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                Log.e("AutoNotificationsFragment", "Error: ${e.message}")
+                requireActivity().runOnUiThread {
+                    Toast.makeText(context, "Failed to fetch notifications", Toast.LENGTH_SHORT).show()
                 }
-                dialog.dismiss()
             }
-            .setNegativeButton("Cancel", null)
-        builder.create().show()
-    }
 
-    private fun showEditNotificationDialog() {
-        val builder = MaterialAlertDialogBuilder(requireContext())
-        val view = LayoutInflater.from(requireContext()).inflate(R.layout.edit_notifications, null)
-        val editNotificationEditText = view.findViewById<EditText>(R.id.editNotificationEditText)
-        val editIntervalEditText = view.findViewById<EditText>(R.id.editIntervalEditText)
-        val editTimeUnitSpinner = view.findViewById<Spinner>(R.id.editTimeUnitSpinner)
+            override fun onResponse(call: Call, response: Response) {
+                val responseData = response.body?.string()
+                Log.d("AutoNotificationsFragment", "Response Data: $responseData")
 
-        builder.setView(view)
-            .setTitle("Edit Notification")
-            .setPositiveButton("Save") { dialog, _ ->
-                val newNotificationText = editNotificationEditText.text.toString()
-                val newIntervalText = editIntervalEditText.text.toString()
-                val newTimeUnit = editTimeUnitSpinner.selectedItem.toString()
-
-                if (newNotificationText.isNotEmpty() && newIntervalText.isNotEmpty()) {
-                    val newInterval = newIntervalText.toLong()
-                    val newTimeInMillis = convertToMillis(newInterval, newTimeUnit)
-
-                    if (notificationsList.isNotEmpty()) {
-                        val oldNotification = notificationsList[0]
-                        // Cancel the old notification
-                        val oldIntent = Intent(requireContext(), NotificationReceiver::class.java).apply {
-                            putExtra("notificationText", oldNotification.first)
+                requireActivity().runOnUiThread {
+                    if (response.isSuccessful && responseData != null) {
+                        try {
+                            val jsonArray = JSONArray(responseData)
+                            val autoNotifications = mutableListOf<AutoNotification>()
+                            for (i in 0 until jsonArray.length()) {
+                                val jsonObject = jsonArray.getJSONObject(i)
+                                val id = jsonObject.getInt("id")
+                                val userId = jsonObject.getInt("user_id") // Consider renaming this variable if needed
+                                val notificationText = jsonObject.getString("notification_text")
+                                val interval = jsonObject.getLong("interval")
+                                val timeUnit = jsonObject.getString("time_unit")
+                                autoNotifications.add(AutoNotification(id, userId, notificationText, interval, timeUnit))
+                            }
+                            autoNotificationAdapter = AutoNotificationAdapter(autoNotifications)
+                            recyclerView.adapter = autoNotificationAdapter
+                        } catch (e: Exception) {
+                            Log.e("AutoNotificationsFragment", "Parsing error: ${e.message}")
+                            Toast.makeText(context, "Failed to parse notifications", Toast.LENGTH_SHORT).show()
                         }
-                        val oldPendingIntent = PendingIntent.getBroadcast(
-                            requireContext(),
-                            0,
-                            oldIntent,
-                            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-                        )
-                        alarmManager.cancel(oldPendingIntent)
-
-                        // Update the notification list and schedule the new notification
-                        notificationsList[0] = newNotificationText to newTimeInMillis
-                        scheduleNotification(newNotificationText, newTimeInMillis)
-                        Toast.makeText(requireContext(), "Notification Updated", Toast.LENGTH_SHORT).show()
                     } else {
-                        Toast.makeText(requireContext(), "No notifications to edit", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "No notifications found", Toast.LENGTH_SHORT).show()
                     }
-                } else {
-                    Toast.makeText(requireContext(), "Please enter all fields", Toast.LENGTH_SHORT).show()
-                }
-                dialog.dismiss()
-            }
-            .setNegativeButton("Cancel", null)
-        builder.create().show()
-    }
-
-
-    private fun showDeleteNotificationDialog() {
-        val builder = MaterialAlertDialogBuilder(requireContext())
-        val view = LayoutInflater.from(requireContext()).inflate(R.layout.delete_notifications, null)
-        val notificationsListView = view.findViewById<ListView>(R.id.notificationsListView)
-        val deleteSelectedButton = view.findViewById<Button>(R.id.deleteSelectedButton)
-
-        val notifications = notificationsList.map { it.first } // Replace with real notifications list
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_multiple_choice, notifications)
-        notificationsListView.adapter = adapter
-        notificationsListView.choiceMode = ListView.CHOICE_MODE_MULTIPLE
-
-        deleteSelectedButton.setOnClickListener {
-            val checkedItems = notificationsListView.checkedItemPositions
-            val itemsToDelete = mutableListOf<String>()
-
-            for (i in 0 until checkedItems.size()) {
-                if (checkedItems.valueAt(i)) {
-                    val position = checkedItems.keyAt(i)
-                    itemsToDelete.add(notifications[position])
                 }
             }
-
-            if (itemsToDelete.isNotEmpty()) {
-                deleteNotifications(itemsToDelete)
-                Toast.makeText(requireContext(), "Notifications Deleted", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(requireContext(), "No notifications selected", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-        builder.setView(view)
-            .setTitle("Delete Notifications")
-            .setNegativeButton("Cancel", null)
-        builder.create().show()
-    }
-
-    private fun convertToMillis(interval: Long, timeUnit: String): Long {
-        return when (timeUnit) {
-            "Minutes" -> interval * 60 * 1000
-            "Hours" -> interval * 60 * 60 * 1000
-            else -> interval * 1000 // Default to seconds
-        }
-    }
-
-    private fun scheduleNotification(notificationText: String, delayInMillis: Long) {
-        val intent = Intent(requireContext(), NotificationReceiver::class.java).apply {
-            putExtra("notificationText", notificationText)
-        }
-        val pendingIntent = PendingIntent.getBroadcast(
-            requireContext(),
-            0,
-            intent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        )
-        val triggerTime = System.currentTimeMillis() + delayInMillis
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent)
-    }
-
-    private fun deleteNotifications(notificationsToDelete: List<String>) {
-        notificationsToDelete.forEach { notificationText ->
-            notificationsList.removeAll { it.first == notificationText }
-            val intent = Intent(requireContext(), NotificationReceiver::class.java).apply {
-                putExtra("notificationText", notificationText)
-            }
-            val pendingIntent = PendingIntent.getBroadcast(
-                requireContext(),
-                0,
-                intent,
-                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-            )
-            alarmManager.cancel(pendingIntent)
-        }
+        })
     }
 }

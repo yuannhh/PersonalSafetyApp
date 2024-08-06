@@ -7,7 +7,23 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.mobdeve.s12.grp4.personalsafetyapp.LoginFragment"
-        tools:layout="@layout/login" />
+        tools:layout="@layout/login" >
+        <action
+            android:id="@+id/action_loginFragment_to_safetyStatusFragment"
+            app:destination="@id/safetyStatusFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_createAccountFragment"
+            app:destination="@id/createAccountFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/createAccountFragment"
+        android:name="com.mobdeve.s12.grp4.personalsafetyapp.CreateAccountFragment"
+        tools:layout="@layout/createacc" >
+        <action
+            android:id="@+id/action_createAccountFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/safetyStatusFragment"
@@ -35,10 +51,10 @@
         android:name="com.mobdeve.s12.grp4.personalsafetyapp.CheckInFragment"
         tools:layout="@layout/activity_check_in">
         <action
-            android:id="@+id/action_CheckInFragment_to_FullMapFragment"
+            android:id="@+id/action_checkInFragment_to_fullMapFragment"
             app:destination="@id/fullMapFragment" />
         <action
-            android:id="@+id/action_CheckInFragment_to_safetyStatusFragment"
+            android:id="@+id/action_checkInFragment_to_safetyStatusFragment"
             app:destination="@id/safetyStatusFragment" />
     </fragment>
 
@@ -47,10 +63,10 @@
         android:name="com.mobdeve.s12.grp4.personalsafetyapp.FullMapFragment"
         tools:layout="@layout/fragment_full_map">
         <action
-            android:id="@+id/action_FullMapFragment_to_CheckInFragment"
+            android:id="@+id/action_fullMapFragment_to_checkInFragment"
             app:destination="@id/checkInFragment" />
         <action
-            android:id="@+id/action_FullMapFragment_to_safetyStatusFragment"
+            android:id="@+id/action_fullMapFragment_to_safetyStatusFragment"
             app:destination="@id/safetyStatusFragment" />
     </fragment>
 
@@ -59,9 +75,33 @@
         android:name="com.mobdeve.s12.grp4.personalsafetyapp.SafetyZonesFragment"
         tools:layout="@layout/safety_zones">
         <action
+            android:id="@+id/action_viewSafetyZonesFragment_to_addSafetyZoneFragment"
+            app:destination="@id/addSafetyZoneFragment" />
+        <action
+            android:id="@+id/action_viewSafetyZonesFragment_to_editSafetyZoneFragment"
+            app:destination="@id/editSafetyZoneFragment" />
+        <action
+            android:id="@+id/action_viewSafetyZonesFragment_to_deleteSafetyZoneFragment"
+            app:destination="@id/deleteSafetyZoneFragment" />
+        <action
             android:id="@+id/action_viewSafetyZonesFragment_to_safetyStatusFragment"
             app:destination="@id/safetyStatusFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/addSafetyZoneFragment"
+        android:name="com.mobdeve.s12.grp4.personalsafetyapp.AddSafetyZoneActivity"
+        tools:layout="@layout/activity_add_safety_zone" />
+
+    <fragment
+        android:id="@+id/editSafetyZoneFragment"
+        android:name="com.mobdeve.s12.grp4.personalsafetyapp.EditSafetyZoneActivity"
+        tools:layout="@layout/activity_edit_safety_zone" />
+
+    <fragment
+        android:id="@+id/deleteSafetyZoneFragment"
+        android:name="com.mobdeve.s12.grp4.personalsafetyapp.DeleteSafetyZoneActivity"
+        tools:layout="@layout/activity_delete_safety_zone" />
 
     <fragment
         android:id="@+id/viewIncidentFragment"
@@ -71,19 +111,19 @@
             android:id="@+id/action_viewIncidentFragment_to_safetyStatusFragment"
             app:destination="@id/safetyStatusFragment" />
         <action
-            android:id="@+id/action_viewIncidentFragment_to_viewAlarmFragment"
-            app:destination="@id/viewAlarmFragment" />
+            android:id="@+id/action_viewIncidentFragment_to_viewAlertFragment"
+            app:destination="@id/viewAlertFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/viewAlarmFragment"
-        android:name="com.mobdeve.s12.grp4.personalsafetyapp.ViewAlarmFragment"
-        tools:layout="@layout/view_alarm">
+        android:id="@+id/viewAlertFragment"
+        android:name="com.mobdeve.s12.grp4.personalsafetyapp.ViewAlertFragment"
+        tools:layout="@layout/view_alert">
         <action
-            android:id="@+id/action_viewAlarmFragment_to_viewIncidentFragment"
+            android:id="@+id/action_viewAlertFragment_to_viewIncidentFragment"
             app:destination="@id/viewIncidentFragment" />
         <action
-            android:id="@+id/action_viewAlarmFragment_to_safetyStatusFragment"
+            android:id="@+id/action_viewAlertFragment_to_safetyStatusFragment"
             app:destination="@id/safetyStatusFragment" />
     </fragment>
 
@@ -95,15 +135,66 @@
     <fragment
         android:id="@+id/autoNotificationsFragment"
         android:name="com.mobdeve.s12.grp4.personalsafetyapp.AutoNotificationsFragment"
-        tools:layout="@layout/auto_notifs">
+        tools:layout="@layout/auto_notifis">
+        <action
+            android:id="@+id/action_autoNotificationsFragment_to_addNotificationFragment"
+            app:destination="@id/addNotificationFragment" />
+        <action
+            android:id="@+id/action_autoNotificationsFragment_to_editNotificationFragment"
+            app:destination="@id/editNotificationFragment" />
+        <action
+            android:id="@+id/action_autoNotificationsFragment_to_deleteNotificationFragment"
+            app:destination="@id/deleteNotificationFragment" />
         <action
             android:id="@+id/action_autoNotificationsFragment_to_safetyStatusFragment"
             app:destination="@id/safetyStatusFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/panicButtonFragment"
-        android:name="com.mobdeve.s12.grp4.personalsafetyapp.PanicButtonFragment"
-        tools:layout="@layout/fragment_panic_button" />
+        android:id="@+id/addNotificationFragment"
+        android:name="com.mobdeve.s12.grp4.personalsafetyapp.AddNotificationFragment"
+        tools:layout="@layout/activity_add_notifis" >
+        <action
+            android:id="@+id/action_addNotificationFragment_to_autoNotificationsFragment"
+            app:destination="@id/autoNotificationsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editNotificationFragment"
+        android:name="com.mobdeve.s12.grp4.personalsafetyapp.EditNotificationFragment"
+        tools:layout="@layout/activity_edit_notifis" >
+        <action
+            android:id="@+id/action_editNotificationFragment_to_autoNotificationsFragment"
+            app:destination="@id/autoNotificationsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/deleteNotificationFragment"
+        android:name="com.mobdeve.s12.grp4.personalsafetyapp.DeleteNotificationFragment"
+        tools:layout="@layout/activity_delete_notifis" >
+        <action
+            android:id="@+id/action_deleteNotificationFragment_to_autoNotificationsFragment"
+            app:destination="@id/autoNotificationsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/weatherFragment"
+        android:name="com.mobdeve.s12.grp4.personalsafetyapp.WeatherFragment"
+        tools:layout="@layout/weather" />
+
+    <fragment
+        android:id="@+id/contactsFragment"
+        android:name="com.mobdeve.s12.grp4.personalsafetyapp.ContactsFragment"
+        tools:layout="@layout/contacts" />
+
+    <fragment
+        android:id="@+id/offlineFragment"
+        android:name="com.mobdeve.s12.grp4.personalsafetyapp.OfflineFragment"
+        tools:layout="@layout/offline" />
+
+    <fragment
+        android:id="@+id/emergencyFragment"
+        android:name="com.mobdeve.s12.grp4.personalsafetyapp.EmergencyFragment"
+        tools:layout="@layout/emergency" />
 
 </navigation>

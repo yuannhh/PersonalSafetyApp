@@ -1,5 +1,7 @@
 package com.mobdeve.s12.grp4.personalsafetyapp
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,6 +17,7 @@ import java.io.IOException
 class LoginFragment : Fragment() {
 
     private val client = OkHttpClient()
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,6 +25,8 @@ class LoginFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.login, container, false)
+
+        sharedPreferences = requireActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
 
         val emailEditText: EditText = view.findViewById(R.id.emailEditText)
         val passwordEditText: EditText = view.findViewById(R.id.passwordEditText)
@@ -46,7 +51,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun login(email: String, password: String) {
-        val url = "http://192.168.1.21/mobdeve/login.php" // Use the IP address of your computer
+        val url = "http://192.168.254.128/mobdeve/login.php" // Use the IP address of your computer
 
         val formBody = FormBody.Builder()
             .add("email", email)
@@ -61,6 +66,9 @@ class LoginFragment : Fragment() {
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 Log.e("LoginFragment", "Error: ${e.message}")
+                requireActivity().runOnUiThread {
+                    Toast.makeText(context, "Network error. Please try again.", Toast.LENGTH_SHORT).show()
+                }
             }
 
             override fun onResponse(call: Call, response: Response) {
@@ -68,9 +76,23 @@ class LoginFragment : Fragment() {
                 requireActivity().runOnUiThread {
                     if (responseData != null) {
                         when {
-                            responseData.contains("Login successful") -> {
-                                Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
-                                (activity as MainActivity).onLoginSuccess()
+                            responseData.contains("success") -> {
+                                val parts = responseData.split(":")
+                                if (parts.size == 2) {
+                                    try {
+                                        val userId = parts[1].toInt()
+                                        val editor = sharedPreferences.edit()
+                                        editor.putInt("user_id", userId)
+                                        editor.apply()
+
+                                        Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
+                                        (activity as MainActivity).onLoginSuccess()
+                                    } catch (e: NumberFormatException) {
+                                        Toast.makeText(context, "An unknown error occurred", Toast.LENGTH_SHORT).show()
+                                    }
+                                } else {
+                                    Toast.makeText(context, "An unknown error occurred", Toast.LENGTH_SHORT).show()
+                                }
                             }
                             responseData.contains("Email does not exist") -> {
                                 Toast.makeText(context, "Email does not exist", Toast.LENGTH_SHORT).show()
@@ -82,6 +104,8 @@ class LoginFragment : Fragment() {
                                 Toast.makeText(context, "An unknown error occurred", Toast.LENGTH_SHORT).show()
                             }
                         }
+                    } else {
+                        Toast.makeText(context, "No response from server", Toast.LENGTH_SHORT).show()
                     }
                 }
             }

@@ -58,46 +58,32 @@
         android:textColor="#010F47"
         android:textSize="20sp"/>
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/incidentViewPager"
-        android:layout_width="350dp"
-        android:layout_height="350dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewIncident"
+        android:layout_width="match_parent"
+        android:layout_height="330dp"
         android:layout_below="@id/listOfIncidents"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:id="@+id/emptyStateTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_below="@id/listOfIncidents"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/ic_circular_background"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="No incidents available."
-        android:textSize="18sp"
-        android:textColor="#010F47"
-        android:visibility="gone" />
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/ic_circular_background" />
 
     <LinearLayout
         android:id="@+id/buttonLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/incidentViewPager"
-        android:layout_margin="10dp"
+        android:layout_below="@id/recyclerViewIncident"
+        android:layout_margin="16dp"
         android:orientation="horizontal"
         android:gravity="center">
 
         <Button
-            android:id="@+id/viewAlarmsButton"
+            android:id="@+id/viewAlertButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginEnd="8dp"
             android:backgroundTint="#00FF00"
-            android:text="View Alarms"
+            android:text="View Alerts"
             android:textColor="#FFFFFF"
             android:textSize="16sp" />
 

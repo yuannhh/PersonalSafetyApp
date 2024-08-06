@@ -42,7 +42,7 @@ class FullMapFragment : Fragment(), OnMapReadyCallback {
         backButton = rootView.findViewById(R.id.backButton)
 
         backButton.setOnClickListener {
-            findNavController().navigate(R.id.action_FullMapFragment_to_safetyStatusFragment)
+            findNavController().navigate(R.id.action_fullMapFragment_to_safetyStatusFragment)
         }
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {

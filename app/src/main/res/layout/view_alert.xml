@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#010F47"
-    tools:context=".ViewAlarmFragment">
+    tools:context=".ViewAlertFragment">
 
     <TextView
         android:id="@+id/titleTextView"
@@ -18,7 +18,7 @@
         android:background="@drawable/circular_background"
         android:gravity="center"
         android:padding="8dp"
-        android:text="Alarm History"
+        android:text="Alert History"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="#010F47" />
@@ -44,7 +44,7 @@
         app:srcCompat="@drawable/ic_arrow_left" />
 
     <TextView
-        android:id="@+id/listOfAlarms"
+        android:id="@+id/listOfAlerts"
         android:layout_width="306dp"
         android:layout_height="50dp"
         android:layout_marginStart="80dp"
@@ -53,46 +53,32 @@
         android:background="@drawable/ic_circular_background"
         android:gravity="center"
         android:padding="10dp"
-        android:text="List of Alarms"
+        android:text="List of Alerts"
         android:textStyle="bold"
         android:textColor="#010F47"
         android:textSize="20sp"/>
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/alarmViewPager"
-        android:layout_width="350dp"
-        android:layout_height="350dp"
-        android:layout_below="@id/listOfAlarms"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewAlert"
+        android:layout_width="match_parent"
+        android:layout_height="330dp"
+        android:layout_below="@id/listOfAlerts"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:id="@+id/emptyStateTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_below="@id/listOfAlarms"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/ic_circular_background"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="No alarms available."
-        android:textSize="18sp"
-        android:textColor="#010F47"
-        android:visibility="gone" />
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/ic_circular_background" />
 
     <LinearLayout
         android:id="@+id/buttonLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/alarmViewPager"
-        android:layout_margin="10dp"
+        android:layout_below="@id/recyclerViewAlert"
+        android:layout_margin="16dp"
         android:orientation="horizontal"
         android:gravity="center">
 
         <Button
-            android:id="@+id/viewIncidentsButton"
+            android:id="@+id/viewIncidentButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginEnd="8dp"

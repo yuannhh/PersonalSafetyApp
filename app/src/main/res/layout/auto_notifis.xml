@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#010F47"
+    tools:context=".AutoNotificationsFragment">
+
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/circular_background"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="Automatic Notifications"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#010F47" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titleTextView"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="-52.5dp"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/ic_more_vertical" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titleTextView"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="355dp"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/ic_arrow_left" />
+
+    <TextView
+        android:id="@+id/notificationSettings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Notification Settings"
+        android:textSize="16sp"
+        android:textColor="#D4D2F8"
+        android:layout_below="@id/imageButton2"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewNotifications"
+        android:layout_width="350dp"
+        android:layout_height="90dp"
+        android:layout_below="@id/notificationSettings"
+        android:layout_marginTop="6dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/ic_circular_background" />
+
+    <LinearLayout
+        android:id="@+id/topRowButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/recyclerViewNotifications"
+        android:layout_marginTop="10dp"
+        android:gravity="start"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/addButton"
+            android:layout_width="170dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="56dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="#00FF00"
+            android:text="Add Notifications"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/middleRowButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topRowButtons"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/editButton"
+            android:layout_width="139dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="#1D09F5"
+            android:text="Edit"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/deleteButton"
+            android:layout_width="139dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="#1D09F5"
+            android:text="Delete"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/instructionsForUse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Instructions for Use"
+        android:textSize="16sp"
+        android:textColor="#D4D2F8"
+        android:layout_below="@id/middleRowButtons"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:id="@+id/autoNotiInstructions"
+        android:layout_width="match_parent"
+        android:layout_height="234dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="30dp"
+        android:layout_below="@id/instructionsForUse"
+        android:background="@drawable/ic_circular_background_longer"
+        android:gravity="left"
+        android:padding="13dp"
+        android:textStyle="bold"
+        android:text="Adding a New Notification\n1. Select 'Add Notification': Click on the Add Notification button.\n2. Set Notification Frequency: Choose how often you want to receive notifications.\n3. Confirm Settings: Once you have chosen the desired settings, save your changes by confirming your selection.\n\nEditing an Existing Notification\n1. Select Notification to Edit: From the list of existing notifications, choose the one you wish to modify.\n2. Make Necessary Changes: Adjust the frequency or time settings as needed.\n3. Save Changes: Confirm and save your updated notification settings.
+        \n\nDeleting a Notification\n1. Select Notification to Delete: Identify the notification you want to remove from your list.
+        \n2. Click 'Delete': Confirm the deletion by selecting the Delete option."
+        android:textColor="#010F47"
+        android:textSize="10sp"/>
+</RelativeLayout>

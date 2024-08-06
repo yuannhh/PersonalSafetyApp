@@ -90,12 +90,12 @@ class CheckInFragment : Fragment(), OnMapReadyCallback {
                     putDouble("latitude", loc.latitude)
                     putDouble("longitude", loc.longitude)
                 }
-                findNavController().navigate(R.id.action_CheckInFragment_to_FullMapFragment, bundle)
+                findNavController().navigate(R.id.action_checkInFragment_to_fullMapFragment, bundle)
             }
         }
 
         imageButton2.setOnClickListener {
-            findNavController().navigate(R.id.action_CheckInFragment_to_safetyStatusFragment)
+            findNavController().navigate(R.id.action_checkInFragment_to_safetyStatusFragment)
         }
 
         return rootView

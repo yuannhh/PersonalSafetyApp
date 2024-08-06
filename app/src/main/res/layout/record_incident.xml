@@ -1,13 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="#010F47"
+    tools:context=".RecordIncidentFragment">
 
     <TextView
+        android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/circular_background"
+        android:gravity="center"
+        android:padding="8dp"
         android:text="Record Incident"
         android:textSize="24sp"
-        android:layout_centerInParent="true"/>
+        android:textStyle="bold"
+        android:textColor="#010F47" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titleTextView"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="-52.5dp"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/ic_more_vertical" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titleTextView"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="355dp"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/ic_arrow_left" />
+
+    <TextView
+        android:id="@+id/recordIncident"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageButton2"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/ic_circular_background"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Record Incident"
+        android:textStyle="bold"
+        android:textColor="#010F47"
+        android:textSize="20sp"/>
+
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="345dp"
+        android:layout_below="@id/recordIncident"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/ic_circular_background"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <EditText
+            android:id="@+id/incidentTypeEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Incident Type"
+            android:layout_marginBottom="8dp"
+            android:inputType="text"/>
+
+        <EditText
+            android:id="@+id/incidentDetailsEditText"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:hint="Incident Details"
+            android:layout_marginBottom="8dp"
+            android:inputType="textMultiLine"
+            android:gravity="top"/>
+
+        <EditText
+            android:id="@+id/locationEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Location"
+            android:layout_marginBottom="8dp"
+            android:inputType="text"/>
+
+        <Spinner
+            android:id="@+id/statusSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="18dp"
+            android:layout_centerHorizontal="true">
+
+            <Button
+                android:id="@+id/submitButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Submit Incident"
+                android:layout_alignParentStart="true"
+                android:layout_marginEnd="8dp" />
+
+            <Button
+                android:id="@+id/cancelButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+    </LinearLayout>
 </RelativeLayout>
