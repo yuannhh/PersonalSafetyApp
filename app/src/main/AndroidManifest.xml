@@ -1,6 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.mobdeve.s12.grp4.personalsafetyapp">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <application
         android:allowBackup="true"
@@ -22,9 +21,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".AlertConfirmationActivity" android:exported="false" />
-        <activity android:name=".AlertSentActivity" android:exported="false" />
-        <receiver android:name=".NotificationReceiver" />
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -32,5 +28,3 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.SET_ALARM" />
 </manifest>
-
-
