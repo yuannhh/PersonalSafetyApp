@@ -7,8 +7,7 @@
     android:background="#010F47"
     tools:context=".SafetyStatusFragment">
 
-    <!-- Title TextView -->
-
+    <!-- Title -->
     <TextView
         android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
@@ -20,14 +19,10 @@
         android:background="@drawable/circular_background"
         android:gravity="center"
         android:padding="8dp"
-        android:text="Safety Status"
+        android:text="Safety Zones"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="#010F47" />
-
-    <!-- Current Safety Status TextView -->
-
-    <!-- Current Location Map Placeholder -->
 
     <ImageButton
         android:id="@+id/imageButton3"
@@ -49,20 +44,37 @@
         android:background="@android:color/transparent"
         app:srcCompat="@drawable/ic_arrow_left" />
 
+    <!-- Current Safety Status TextView -->
+    <TextView
+        android:id="@+id/currentSafetyStatusTextView"
+        android:layout_width="350dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/imageButton2"
+        android:layout_marginTop="22dp"
+        android:background="@drawable/circular_background"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:padding="18dp"
+        android:text="Current Safety Status: UNKNOWN"
+        android:textColor="#010F47"
+        android:textSize="17sp" />
+
+    <!-- Current Location Map Placeholder -->
     <View
-        android:id="@+id/safetyStatusPlaceholder"
-        android:layout_width="wrap_content"
+        android:id="@+id/currentLocationMapPlaceholder"
+        android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_below="@id/titleTextView"
-        android:layout_marginTop="70dp"
-        android:background="@android:color/darker_gray" />
+        android:layout_below="@id/currentSafetyStatusTextView"
+        android:layout_marginTop="16dp"
+        android:background="#E9E7FF" />
 
     <!-- Button Row for Check In and View Safety Zones -->
     <LinearLayout
         android:id="@+id/topRowButtons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/safetyStatusPlaceholder"
+        android:layout_below="@id/currentLocationMapPlaceholder"
         android:layout_marginTop="16dp"
         android:gravity="center"
         android:orientation="horizontal">
@@ -85,7 +97,6 @@
     </LinearLayout>
 
     <!-- View Incident Button -->
-
     <LinearLayout
         android:id="@+id/middleRowButtons"
         android:layout_width="match_parent"
@@ -112,7 +123,6 @@
             android:backgroundTint="#1D09F5"
             android:text="Record Incident" />
     </LinearLayout>
-
 
     <LinearLayout
         android:id="@+id/bottomRowButtons"

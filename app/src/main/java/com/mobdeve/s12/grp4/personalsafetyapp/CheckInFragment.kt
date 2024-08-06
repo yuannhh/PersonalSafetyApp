@@ -69,6 +69,14 @@ class CheckInFragment : Fragment() {
 
                     currentLocation = GeoPoint(location.latitude, location.longitude)
 
+                    // Store data in SharedPreferences
+                    val sharedPreferences = requireActivity().getSharedPreferences("safety_prefs", 0)
+                    val editor = sharedPreferences.edit()
+                    editor.putString("safety_status", "SAFE")
+                    editor.putFloat("latitude", currentLocation!!.latitude.toFloat())
+                    editor.putFloat("longitude", currentLocation!!.longitude.toFloat())
+                    editor.apply()
+
                     geolocationTextView.text = "Geolocation: CONFIRMED"
                     geolocationTextView.setBackgroundColor(resources.getColor(R.color.green, null))
 
