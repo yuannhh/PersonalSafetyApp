@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "424310255677",
+    "project_id": "personalsafetyapp-60791",
+    "storage_bucket": "personalsafetyapp-60791.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:424310255677:android:9b86f4c04103da984dba54",
+        "android_client_info": {
+          "package_name": "com.mobdeve.s12.grp4.personalsafetyapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwGkXCMRTT1JiALqiDlb_064QYCltPubc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
