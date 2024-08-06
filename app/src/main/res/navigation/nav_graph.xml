@@ -101,4 +101,9 @@
             app:destination="@id/safetyStatusFragment" />
     </fragment>
 
+    <fragment
+        android:id="@+id/panicButtonFragment"
+        android:name="com.mobdeve.s12.grp4.personalsafetyapp.PanicButtonFragment"
+        tools:layout="@layout/fragment_panic_button" />
+
 </navigation>
