@@ -61,7 +61,7 @@
         android:textSize="17sp" />
 
     <!-- Current Location Map Placeholder -->
-    <View
+    <org.osmdroid.views.MapView
         android:id="@+id/currentLocationMapPlaceholder"
         android:layout_width="match_parent"
         android:layout_height="200dp"

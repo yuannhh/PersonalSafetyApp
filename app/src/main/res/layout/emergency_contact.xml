@@ -1,0 +1,137 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0A2463"
+    tools:context=".EmergencyContactsActivity">
+
+    <TextView
+        android:id="@+id/emergencyContactsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:text="Emergency Contacts"
+        android:textSize="24sp"
+        android:textColor="#C0C6F2"
+        android:fontFamily="sans-serif"/>
+
+    <TextView
+        android:id="@+id/listOfContactsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/emergencyContactsTitle"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:text="List of Contacts"
+        android:textSize="18sp"
+        android:textColor="#C0C6F2"
+        android:fontFamily="sans-serif"/>
+
+    <LinearLayout
+        android:id="@+id/contactsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/listOfContactsTitle"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/contact1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:text="JUAN BERNARDO - 0977 860 9767"
+            android:textSize="16sp"
+            android:textColor="#0A2463"
+            android:fontFamily="sans-serif"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/colorAccent"
+            android:backgroundTintMode="src_in"
+            android:background="@drawable/border"
+            />
+
+        <TextView
+            android:id="@+id/contact2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:text="INGRID CHEN - 0917 206 2249"
+            android:textSize="16sp"
+            android:textColor="#0A2463"
+            android:fontFamily="sans-serif"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/colorAccent"
+            android:backgroundTintMode="src_in"
+            android:background="@drawable/border"
+            />
+
+        <TextView
+            android:id="@+id/contact3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:text="PIA KRUEGER - 0906 243 5588"
+            android:textSize="16sp"
+            android:textColor="#0A2463"
+            android:fontFamily="sans-serif"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/colorAccent"
+            android:backgroundTintMode="src_in"
+            android:background="@drawable/border"
+            />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/addContactButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/contactsContainer"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        android:text="Add Contact"
+        android:textSize="16sp"
+        android:background="#150578"
+        android:textColor="#C0C6F2"
+        android:fontFamily="sans-serif"
+        android:backgroundTint="@color/colorAccent"
+        android:backgroundTintMode="src_in" />
+
+    <Button
+        android:id="@+id/deleteContactButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/addContactButton"
+        android:layout_below="@id/contactsContainer"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:text="Delete Contact"
+        android:textSize="16sp"
+        android:background="#150578"
+        android:textColor="#C0C6F2"
+        android:fontFamily="sans-serif"
+        android:backgroundTint="@color/colorAccent"
+        android:backgroundTintMode="src_in" />
+
+    <Button
+        android:id="@+id/editContactButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/contactsContainer"
+        android:layout_marginLeft="-308dp"
+        android:layout_marginTop="90dp"
+        android:layout_toRightOf="@id/deleteContactButton"
+        android:background="#150578"
+        android:backgroundTint="@color/colorAccent"
+        android:backgroundTintMode="src_in"
+        android:fontFamily="sans-serif"
+        android:text="Edit"
+        android:textColor="#C0C6F2"
+        android:textSize="16sp" />
+</RelativeLayout>

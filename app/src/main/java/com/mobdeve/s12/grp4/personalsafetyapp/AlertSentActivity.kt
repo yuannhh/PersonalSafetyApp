@@ -30,6 +30,3 @@ class AlertSentActivity : AppCompatActivity() {
 }
 
 
-
-
-

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#0A1F44"
-    tools:context=".PanicButtonFragment">
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/panic_button_text"
@@ -42,6 +42,6 @@
         android:textColor="#000000"
         android:textSize="14sp"
         android:text="Instructions for use\n\nSend an Alert:\n• Tap the Emergency Button\n• A dialog box will appear asking, 'Are you sure you want to send an alert?'\n• Confirm or Cancel:\n  • Tap 'Confirm' to send the alert.\n  • Tap 'Cancel' to go back and not send the alert.\n\nManaging Emergency Contacts:\n• Access Emergency Contacts: Tap the small gear icon near the Panic Button to open the emergency contacts menu.\n• Modify Contacts:\n  • Add Contact: Enter the details of a new emergency contact (name, phone number, relationship).\n  • Edit Contact: Select an existing contact to update their information.\n  • Remove Contact: Delete any contact from the list.\n• Save Changes: Ensure all changes are saved before closing the emergency contacts menu.\n\nUse Wisely: Only use the Panic Button in actual emergency situations.\n\nCheck Contacts Regularly: Ensure your emergency contacts are up to date.\n\nConfirmation: The confirmation dialog helps prevent accidental alerts." />
-</RelativeLayout>
 
+</RelativeLayout>
 

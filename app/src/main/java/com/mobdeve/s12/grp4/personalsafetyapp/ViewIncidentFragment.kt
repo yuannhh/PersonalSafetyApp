@@ -1,5 +1,6 @@
 package com.mobdeve.s12.grp4.personalsafetyapp
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,13 +9,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.mobdeve.s12.grp4.personalsafetyapp.databinding.ViewIncidentBinding
 import okhttp3.*
 import org.json.JSONArray
 import java.io.IOException
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.RecyclerView
 
 class ViewIncidentFragment : Fragment() {
 
@@ -36,7 +37,7 @@ class ViewIncidentFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Get user ID from SharedPreferences
-        val sharedPref = requireActivity().getSharedPreferences("UserPrefs", 0)
+        val sharedPref = requireActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
         val userId = sharedPref.getInt("userId", -1)
         if (userId == -1) {
             Toast.makeText(context, "User not logged in", Toast.LENGTH_SHORT).show()
@@ -49,7 +50,7 @@ class ViewIncidentFragment : Fragment() {
         binding.recyclerViewIncident.adapter = adapter
 
         // Fetch incidents for the logged-in user
-        fetchIncidents(userId)
+        fetchIncidentDetails(userId)
 
         binding.viewAlertButton.setOnClickListener {
             findNavController().navigate(R.id.action_viewIncidentFragment_to_viewAlertFragment)
@@ -64,8 +65,8 @@ class ViewIncidentFragment : Fragment() {
         }
     }
 
-    private fun fetchIncidents(userId: Int) {
-        val url = "http://192.168.254.128/mobdeve/incidents.php" // Replace with your server URL
+    private fun fetchIncidentDetails(userId: Int) {
+        val url = "http://192.168.254.128/mobdeve/incidents.php"
 
         val formBody = FormBody.Builder()
             .add("user_id", userId.toString())
@@ -79,7 +80,7 @@ class ViewIncidentFragment : Fragment() {
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 requireActivity().runOnUiThread {
-                    Toast.makeText(context, "Failed to fetch incidents", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Failed to fetch incident details", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -95,8 +96,8 @@ class ViewIncidentFragment : Fragment() {
                                 val incident = Incident(
                                     jsonObject.getInt("id"),
                                     jsonObject.getInt("user_id"),
-                                    jsonObject.getString("incident_type"),
-                                    jsonObject.getString("incident_details"),
+                                    jsonObject.getString("type"),
+                                    jsonObject.getString("details"),
                                     jsonObject.getString("location"),
                                     jsonObject.getString("timestamp"),
                                     jsonObject.getString("status")
@@ -129,15 +130,14 @@ class ViewIncidentFragment : Fragment() {
         }
     }
 
-
     private fun showClearHistoryConfirmationDialog() {
         AlertDialog.Builder(requireContext()).apply {
             setTitle("Clear Incident History")
             setMessage("Are you sure you want to clear all incidents?")
             setPositiveButton("Yes") { _, _ ->
                 // Handle clear history logic here
-                incidents.clear() // Clear the incidents list
-                (binding.recyclerViewIncident.adapter as IncidentAdapter).notifyDataSetChanged() // Notify adapter of changes
+                incidents.clear()
+                (binding.recyclerViewIncident.adapter as IncidentAdapter).notifyDataSetChanged()
                 updateEmptyState()
                 Toast.makeText(requireContext(), "Incident history cleared", Toast.LENGTH_SHORT).show()
             }
@@ -165,14 +165,12 @@ class ViewIncidentFragment : Fragment() {
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IncidentViewHolder {
-            val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_incident, parent, false)
+            val view = LayoutInflater.from(parent.context).inflate(R.layout.item_incident, parent, false)
             return IncidentViewHolder(view)
         }
 
         override fun onBindViewHolder(holder: IncidentViewHolder, position: Int) {
-            val incident = incidents[position]
-            holder.bind(incident)
+            holder.bind(incidents[position])
         }
 
         override fun getItemCount(): Int = incidents.size

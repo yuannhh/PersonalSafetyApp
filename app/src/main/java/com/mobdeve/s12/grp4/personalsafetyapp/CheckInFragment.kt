@@ -12,7 +12,6 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import org.osmdroid.api.IMapController
@@ -35,6 +34,9 @@ class CheckInFragment : Fragment() {
     private lateinit var timeHandler: Handler
     private lateinit var timeRunnable: Runnable
 
+    // Default location in Metro Manila
+    private val defaultLocation = GeoPoint(14.599512, 120.984222) // Latitude and Longitude of Metro Manila
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,6 +52,8 @@ class CheckInFragment : Fragment() {
         val existingTimeTextView: TextView = rootView.findViewById(R.id.existingTime)
         val mapOverlay: View = rootView.findViewById(R.id.mapOverlay)
         val imageButton2: ImageButton = rootView.findViewById(R.id.imageButton2)
+
+        confirmedButton.visibility = View.GONE
 
         timeRunnable = object : Runnable {
             override fun run() {
@@ -92,11 +96,19 @@ class CheckInFragment : Fragment() {
             findNavController().navigate(R.id.action_checkInFragment_to_safetyStatusFragment)
         }
 
+        // Map overlay click listener
         mapOverlay.setOnClickListener {
             currentLocation?.let { loc ->
                 val bundle = Bundle().apply {
                     putDouble("latitude", loc.latitude)
                     putDouble("longitude", loc.longitude)
+                }
+                findNavController().navigate(R.id.action_checkInFragment_to_fullMapFragment, bundle)
+            } ?: run {
+                // Default to the initial location (Metro Manila) if currentLocation is not available
+                val bundle = Bundle().apply {
+                    putDouble("latitude", defaultLocation.latitude)
+                    putDouble("longitude", defaultLocation.longitude)
                 }
                 findNavController().navigate(R.id.action_checkInFragment_to_fullMapFragment, bundle)
             }
@@ -117,10 +129,11 @@ class CheckInFragment : Fragment() {
 
         locationOverlay.runOnFirstFix {
             requireActivity().runOnUiThread {
-                val myLocation = locationOverlay.myLocation
-                mapController.setCenter(myLocation)
-                mapController.animateTo(myLocation)
-                updateLocationInfo(myLocation)
+                // Use default location initially
+                val initialLocation = locationOverlay.myLocation ?: defaultLocation
+                mapController.setCenter(initialLocation)
+                mapController.animateTo(initialLocation)
+                updateLocationInfo(initialLocation)
             }
         }
 

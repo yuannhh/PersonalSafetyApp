@@ -11,17 +11,16 @@ class AlertConfirmationActivity : AppCompatActivity() {
         setContentView(R.layout.alert_confirmation)
 
         val btnConfirm = findViewById<Button>(R.id.btn_confirm)
+        val btnCancel = findViewById<Button>(R.id.btn_cancel)
+
         btnConfirm.setOnClickListener {
-            // Handle confirmation logic here
             val intent = Intent(this, AlertSentActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
-        val btnCancel = findViewById<Button>(R.id.btn_cancel)
         btnCancel.setOnClickListener {
-            // Handle cancellation logic here
             finish()
         }
     }
 }
-

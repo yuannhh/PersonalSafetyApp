@@ -1,5 +1,6 @@
 package com.mobdeve.s12.grp4.personalsafetyapp
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -33,8 +34,9 @@ class AutoNotificationsFragment : Fragment() {
         editButton = view.findViewById(R.id.editButton)
         deleteButton = view.findViewById(R.id.deleteButton)
 
-        val sharedPref = requireActivity().getSharedPreferences("UserPrefs", 0)
-        val userId = sharedPref.getInt("userId", -1)
+        val sharedPref = requireActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+        val userId = sharedPref.getInt("user_id", -1)
+
         if (userId == -1) {
             Toast.makeText(context, "User not logged in", Toast.LENGTH_SHORT).show()
             return view
