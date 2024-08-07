@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import okhttp3.*
 import org.json.JSONArray
@@ -45,15 +45,15 @@ class SafetyZonesFragment : Fragment() {
         fetchSafetyZones(userId)
 
         addButton.setOnClickListener {
-            findNavController().navigate(R.id.action_viewSafetyZonesFragment_to_addSafetyZoneFragment)
+            replaceFragment(AddSafetyZoneActivity())
         }
 
         editButton.setOnClickListener {
-            findNavController().navigate(R.id.action_viewSafetyZonesFragment_to_editSafetyZoneFragment)
+            replaceFragment(EditSafetyZoneActivity())
         }
 
         deleteButton.setOnClickListener {
-            findNavController().navigate(R.id.action_viewSafetyZonesFragment_to_deleteSafetyZoneFragment)
+            replaceFragment(DeleteSafetyZoneActivity())
         }
 
         return view
@@ -113,5 +113,12 @@ class SafetyZonesFragment : Fragment() {
                 }
             }
         })
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.nav_host_fragment, fragment)
+            .addToBackStack(null) // Optional: Add to back stack if you want the user to be able to navigate back
+            .commit()
     }
 }

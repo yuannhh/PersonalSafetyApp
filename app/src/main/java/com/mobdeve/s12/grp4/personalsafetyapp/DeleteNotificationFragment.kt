@@ -63,7 +63,7 @@ class DeleteNotificationFragment : Fragment() {
                 requireActivity().runOnUiThread {
                     if (response.isSuccessful) {
                         Toast.makeText(requireContext(), "Auto notification deleted successfully", Toast.LENGTH_SHORT).show()
-                        requireActivity().onBackPressed()
+                        requireActivity().supportFragmentManager.popBackStack()
                     } else {
                         Toast.makeText(requireContext(), "Error: ${response.message}", Toast.LENGTH_SHORT).show()
                     }

@@ -76,7 +76,7 @@ class EditNotificationFragment : Fragment() {
                 requireActivity().runOnUiThread {
                     if (response.isSuccessful) {
                         Toast.makeText(requireContext(), "Auto notification edited successfully", Toast.LENGTH_SHORT).show()
-                        requireActivity().onBackPressed()
+                        requireActivity().supportFragmentManager.popBackStack()
                     } else {
                         Toast.makeText(requireContext(), "Error: ${response.message}", Toast.LENGTH_SHORT).show()
                     }

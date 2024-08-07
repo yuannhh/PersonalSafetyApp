@@ -53,7 +53,8 @@ class ViewIncidentFragment : Fragment() {
         fetchIncidentDetails(userId)
 
         binding.viewAlertButton.setOnClickListener {
-            findNavController().navigate(R.id.action_viewIncidentFragment_to_viewAlertFragment)
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.nav_host_fragment, ViewAlertFragment()) .commit()
         }
 
         binding.clearHistoryButton.setOnClickListener {
@@ -61,7 +62,9 @@ class ViewIncidentFragment : Fragment() {
         }
 
         binding.imageButton2.setOnClickListener {
-            findNavController().navigate(R.id.action_viewIncidentFragment_to_safetyStatusFragment)
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.nav_host_fragment, SafetyStatusFragment())
+                .commit()
         }
     }
 

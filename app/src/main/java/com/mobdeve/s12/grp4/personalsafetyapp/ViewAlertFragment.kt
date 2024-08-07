@@ -6,8 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mobdeve.s12.grp4.personalsafetyapp.databinding.ViewAlertBinding
@@ -15,7 +16,6 @@ import okhttp3.*
 import org.json.JSONArray
 import java.io.IOException
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 
 class ViewAlertFragment : Fragment() {
 
@@ -53,7 +53,9 @@ class ViewAlertFragment : Fragment() {
         fetchAlerts(userId)
 
         binding.viewIncidentButton.setOnClickListener {
-            findNavController().navigate(R.id.action_viewAlertFragment_to_viewIncidentFragment)
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.nav_host_fragment, ViewIncidentFragment())
+                .commit()
         }
 
         binding.clearHistoryButton.setOnClickListener {
@@ -61,7 +63,9 @@ class ViewAlertFragment : Fragment() {
         }
 
         binding.imageButton2.setOnClickListener {
-            findNavController().navigate(R.id.action_viewAlertFragment_to_safetyStatusFragment)
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.nav_host_fragment, SafetyStatusFragment())
+                .commit()
         }
     }
 

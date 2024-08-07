@@ -13,7 +13,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.FragmentManager
 import org.osmdroid.api.IMapController
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
@@ -93,25 +93,19 @@ class CheckInFragment : Fragment() {
         }
 
         imageButton2.setOnClickListener {
-            findNavController().navigate(R.id.action_checkInFragment_to_safetyStatusFragment)
+            replaceFragment(SafetyStatusFragment())
         }
 
         // Map overlay click listener
         mapOverlay.setOnClickListener {
-            currentLocation?.let { loc ->
-                val bundle = Bundle().apply {
-                    putDouble("latitude", loc.latitude)
-                    putDouble("longitude", loc.longitude)
-                }
-                findNavController().navigate(R.id.action_checkInFragment_to_fullMapFragment, bundle)
-            } ?: run {
-                // Default to the initial location (Metro Manila) if currentLocation is not available
-                val bundle = Bundle().apply {
-                    putDouble("latitude", defaultLocation.latitude)
-                    putDouble("longitude", defaultLocation.longitude)
-                }
-                findNavController().navigate(R.id.action_checkInFragment_to_fullMapFragment, bundle)
+            val bundle = Bundle().apply {
+                putDouble("latitude", currentLocation?.latitude ?: defaultLocation.latitude)
+                putDouble("longitude", currentLocation?.longitude ?: defaultLocation.longitude)
             }
+            val fullMapFragment = FullMapFragment().apply {
+                arguments = bundle
+            }
+            replaceFragment(fullMapFragment)
         }
 
         // Initialize map
@@ -167,5 +161,11 @@ class CheckInFragment : Fragment() {
         locationOverlay.myLocationProvider.lastKnownLocation?.let {
             callback(it)
         }
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.nav_host_fragment, fragment)
+            .commit()
     }
 }
