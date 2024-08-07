@@ -32,6 +32,8 @@ class RecordIncidentFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.record_incident, container, false)
 
+        val imageButton2: ImageButton = view.findViewById(R.id.imageButton2)
+
         incidentTypeEditText = view.findViewById(R.id.incidentTypeEditText)
         incidentDetailsEditText = view.findViewById(R.id.incidentDetailsEditText)
         locationEditText = view.findViewById(R.id.locationEditText)
@@ -51,6 +53,9 @@ class RecordIncidentFragment : Fragment() {
             submitIncident()
         }
 
+        imageButton2.setOnClickListener {
+            replaceFragment(SafetyStatusFragment())
+        }
         cancelButton.setOnClickListener {
             // Handle cancel button click (e.g., clear fields or navigate away)
             Toast.makeText(requireContext(), "Cancelled", Toast.LENGTH_SHORT).show()
@@ -73,7 +78,7 @@ class RecordIncidentFragment : Fragment() {
         }
 
         // URL of the PHP script that handles the database insertion
-        val url = "http://192.168.254.128/mobdeve/submit_incident.php"
+        val url = "http://192.168.56.1/mobdeve/submit_incident.php"
 
         // Create a request to send data to PHP script
         val requestBody = "user_id=$userId&incident_type=$incidentType&incident_details=$incidentDetails&location=$location&status=$status&timestamp=$timestamp"
@@ -108,5 +113,10 @@ class RecordIncidentFragment : Fragment() {
         incidentDetailsEditText.text.clear()
         locationEditText.text.clear()
         statusSpinner.setSelection(0)
+    }
+    private fun replaceFragment(fragment: Fragment) {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.nav_host_fragment, fragment)
+            .commit()
     }
 }

@@ -40,10 +40,7 @@ class FullMapFragment : Fragment() {
         backButton = rootView.findViewById(R.id.backButton)
 
         backButton.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.nav_host_fragment, CheckInFragment())
-                .addToBackStack(null) // Add to back stack to allow navigation back
-                .commit()
+            replaceFragment(CheckInFragment())
         }
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -118,5 +115,10 @@ class FullMapFragment : Fragment() {
                 null
             }
         }
+    }
+    private fun replaceFragment(fragment: Fragment) {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.nav_host_fragment, fragment)
+            .commit()
     }
 }

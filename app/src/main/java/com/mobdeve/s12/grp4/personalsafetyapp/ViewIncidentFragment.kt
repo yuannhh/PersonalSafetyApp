@@ -1,7 +1,6 @@
 package com.mobdeve.s12.grp4.personalsafetyapp
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -25,7 +24,6 @@ class ViewIncidentFragment : Fragment() {
 
     private var incidents = mutableListOf<Incident>()
     private val client = OkHttpClient()
-    private lateinit var sharedPref: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,23 +36,24 @@ class ViewIncidentFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        sharedPref = requireActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+        // Get user ID from SharedPreferences
+        val sharedPref = requireActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
         val userId = sharedPref.getInt("userId", -1)
-
         if (userId == -1) {
             Toast.makeText(context, "User not logged in", Toast.LENGTH_SHORT).show()
             return
         }
-
-        fetchIncidentDetails(userId)
 
         // Setup RecyclerView
         binding.recyclerViewIncident.layoutManager = LinearLayoutManager(context)
         val adapter = IncidentAdapter()
         binding.recyclerViewIncident.adapter = adapter
 
+        // Fetch incidents for the logged-in user
+        fetchIncidentDetails(userId)
+
         binding.viewAlertButton.setOnClickListener {
-            replaceFragment(ViewAlertFragment())
+            findNavController().navigate(R.id.action_viewIncidentFragment_to_viewAlertFragment)
         }
 
         binding.clearHistoryButton.setOnClickListener {
@@ -62,12 +61,13 @@ class ViewIncidentFragment : Fragment() {
         }
 
         binding.imageButton2.setOnClickListener {
-            replaceFragment(SafetyStatusFragment())
+            findNavController().navigate(R.id.action_viewIncidentFragment_to_safetyStatusFragment)
         }
     }
 
     private fun fetchIncidentDetails(userId: Int) {
-        val url = "http://192.168.254.128/mobdeve/incidents.php"
+        val url = "http://192.168.56.1/mobdeve/incidents.php"
+
         val formBody = FormBody.Builder()
             .add("user_id", userId.toString())
             .build()
@@ -80,8 +80,7 @@ class ViewIncidentFragment : Fragment() {
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 requireActivity().runOnUiThread {
-                    Toast.makeText(context, "Network error: ${e.message}", Toast.LENGTH_SHORT).show()
-                    e.printStackTrace()
+                    Toast.makeText(context, "Failed to fetch incident details", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -108,16 +107,10 @@ class ViewIncidentFragment : Fragment() {
                             (binding.recyclerViewIncident.adapter as IncidentAdapter).notifyDataSetChanged()
                             updateEmptyState()
                         } catch (e: Exception) {
-                            Toast.makeText(context, "Failed to parse incident data: ${e.message}", Toast.LENGTH_SHORT).show()
-                            e.printStackTrace()
+                            Toast.makeText(context, "Failed to parse data", Toast.LENGTH_SHORT).show()
                         }
                     } else {
-                        // Check if response code is 403 Forbidden
-                        if (response.code == 403) {
-                            Toast.makeText(context, "Access Forbidden: ${response.message}", Toast.LENGTH_SHORT).show()
-                        } else {
-                            Toast.makeText(context, "Error: ${response.message}", Toast.LENGTH_SHORT).show()
-                        }
+                        Toast.makeText(context, "Error: ${response.message}", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -187,7 +180,6 @@ class ViewIncidentFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
     private fun replaceFragment(fragment: Fragment) {
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.nav_host_fragment, fragment)

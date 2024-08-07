@@ -3,7 +3,7 @@ include 'db_connect.php';
 
 $id = $_POST['id'] ?? '';
 
-$sql = "DELETE FROM contacts WHERE id = ?";
+$sql = "DELETE FROM emergency_contacts WHERE id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $id);
 

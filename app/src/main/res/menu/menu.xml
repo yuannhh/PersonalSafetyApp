@@ -16,10 +16,6 @@
         android:icon="@drawable/ic_contacts_border"
         android:title="Contacts"/>
 
-    <item
-        android:id="@+id/nav_offline_mode"
-        android:icon="@drawable/ic_offline_border"
-        android:title="Offline"/>
 
     <item
         android:id="@+id/nav_emergency_mode"

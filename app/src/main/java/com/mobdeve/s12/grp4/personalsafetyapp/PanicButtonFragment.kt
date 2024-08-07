@@ -25,4 +25,3 @@ class PanicButtonFragment : Fragment() {
         return rootView
     }
 }
-

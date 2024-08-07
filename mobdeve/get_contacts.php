@@ -1,9 +1,11 @@
 <?php
 include 'db_connect.php';
 
+header('Content-Type: application/json');
+
 $user_id = $_GET['user_id'] ?? 0;
 
-$sql = "SELECT * FROM contacts WHERE user_id = ?";
+$sql = "SELECT id, contact_name, contact_phone FROM emergency_contacts WHERE user_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
@@ -14,9 +16,10 @@ while ($row = $result->fetch_assoc()) {
     $contacts[] = $row;
 }
 
-$output = array_map(function($contact) {
-    return implode('|', [$contact['id'], $contact['contact_name'], $contact['contact_phone']]);
-}, $contacts);
+echo json_encode($contacts);
 
-echo implode("\n", $output);
+$conn->close();
 ?>
+
+
+

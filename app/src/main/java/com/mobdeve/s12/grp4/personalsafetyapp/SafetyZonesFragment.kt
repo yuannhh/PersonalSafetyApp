@@ -7,9 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import okhttp3.*
 import org.json.JSONArray
@@ -33,6 +34,7 @@ class SafetyZonesFragment : Fragment() {
         addButton = view.findViewById(R.id.addButton)
         editButton = view.findViewById(R.id.editButton)
         deleteButton = view.findViewById(R.id.deleteButton)
+        val imageButton2: ImageButton = view.findViewById(R.id.imageButton2)
 
         val sharedPref = requireActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
         val userId = sharedPref.getInt("user_id", -1)
@@ -44,23 +46,26 @@ class SafetyZonesFragment : Fragment() {
 
         fetchSafetyZones(userId)
 
+        imageButton2.setOnClickListener {
+            replaceFragment(SafetyStatusFragment())
+        }
         addButton.setOnClickListener {
-            replaceFragment(AddSafetyZoneActivity())
+            findNavController().navigate(R.id.action_viewSafetyZonesFragment_to_addSafetyZoneFragment)
         }
 
         editButton.setOnClickListener {
-            replaceFragment(EditSafetyZoneActivity())
+            findNavController().navigate(R.id.action_viewSafetyZonesFragment_to_editSafetyZoneFragment)
         }
 
         deleteButton.setOnClickListener {
-            replaceFragment(DeleteSafetyZoneActivity())
+            findNavController().navigate(R.id.action_viewSafetyZonesFragment_to_deleteSafetyZoneFragment)
         }
 
         return view
     }
 
     private fun fetchSafetyZones(userId: Int) {
-        val url = "http://192.168.254.128/mobdeve/safety_zones.php"
+        val url = "http://192.168.56.1/mobdeve/safety_zones.php"
 
         val formBody = FormBody.Builder()
             .add("user_id", userId.toString())
@@ -118,7 +123,6 @@ class SafetyZonesFragment : Fragment() {
     private fun replaceFragment(fragment: Fragment) {
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.nav_host_fragment, fragment)
-            .addToBackStack(null) // Optional: Add to back stack if you want the user to be able to navigate back
             .commit()
     }
 }

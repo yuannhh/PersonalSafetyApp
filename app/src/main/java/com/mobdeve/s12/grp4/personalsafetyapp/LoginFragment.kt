@@ -17,20 +17,21 @@ import java.io.IOException
 class LoginFragment : Fragment() {
 
     private val client = OkHttpClient()
-    private lateinit var sharedPref: SharedPreferences
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.login, container, false)
+
+        sharedPreferences = requireActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
 
         val emailEditText: EditText = view.findViewById(R.id.emailEditText)
         val passwordEditText: EditText = view.findViewById(R.id.passwordEditText)
         val loginButton: Button = view.findViewById(R.id.loginButton)
         val registerButton: Button = view.findViewById(R.id.registerButton)
-
-        sharedPref = requireActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
 
         loginButton.setOnClickListener {
             val email = emailEditText.text.toString()
@@ -39,6 +40,7 @@ class LoginFragment : Fragment() {
         }
 
         registerButton.setOnClickListener {
+            // Navigate to CreateAccountFragment
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.nav_host_fragment, CreateAccountFragment())
                 .addToBackStack(null)
@@ -49,7 +51,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun login(email: String, password: String) {
-        val url = "http://192.168.254.128/mobdeve/login.php" // Use the IP address of your computer
+        val url = "http://192.168.56.1/mobdeve/login.php" // Use the IP address of your computer
 
         val formBody = FormBody.Builder()
             .add("email", email)
@@ -79,13 +81,12 @@ class LoginFragment : Fragment() {
                                 if (parts.size == 2) {
                                     try {
                                         val userId = parts[1].toInt()
-                                        // Save userId in SharedPreferences
-                                        with(sharedPref.edit()) {
-                                            putInt("userId", userId)
-                                            apply()
-                                        }
-                                        // Notify MainActivity with user_id
-                                        (activity as? MainActivity)?.onLoginSuccess()
+                                        val editor = sharedPreferences.edit()
+                                        editor.putInt("user_id", userId)
+                                        editor.apply()
+
+                                        Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
+                                        (activity as MainActivity).onLoginSuccess()
                                     } catch (e: NumberFormatException) {
                                         Toast.makeText(context, "An unknown error occurred", Toast.LENGTH_SHORT).show()
                                     }

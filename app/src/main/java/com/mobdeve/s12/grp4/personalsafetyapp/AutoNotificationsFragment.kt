@@ -7,9 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import okhttp3.*
 import org.json.JSONArray
@@ -33,6 +34,7 @@ class AutoNotificationsFragment : Fragment() {
         addButton = view.findViewById(R.id.addButton)
         editButton = view.findViewById(R.id.editButton)
         deleteButton = view.findViewById(R.id.deleteButton)
+        val imageButton2: ImageButton = view.findViewById(R.id.imageButton2)
 
         val sharedPref = requireActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
         val userId = sharedPref.getInt("user_id", -1)
@@ -44,23 +46,26 @@ class AutoNotificationsFragment : Fragment() {
 
         fetchAutoNotifications(userId)
 
+        imageButton2.setOnClickListener {
+            replaceFragment(SafetyStatusFragment())
+        }
         addButton.setOnClickListener {
-            replaceFragment(AddNotificationFragment())
+            findNavController().navigate(R.id.action_autoNotificationsFragment_to_addNotificationFragment)
         }
 
         editButton.setOnClickListener {
-            replaceFragment(EditNotificationFragment())
+            findNavController().navigate(R.id.action_autoNotificationsFragment_to_editNotificationFragment)
         }
 
         deleteButton.setOnClickListener {
-            replaceFragment(DeleteNotificationFragment())
+            findNavController().navigate(R.id.action_autoNotificationsFragment_to_deleteNotificationFragment)
         }
 
         return view
     }
 
     private fun fetchAutoNotifications(userIdParam: Int) {
-        val url = "http://192.168.254.128/mobdeve/auto_notifications.php"
+        val url = "http://192.168.56.1/mobdeve/auto_notifications.php"
 
         val formBody = FormBody.Builder()
             .add("user_id", userIdParam.toString())
@@ -91,7 +96,7 @@ class AutoNotificationsFragment : Fragment() {
                             for (i in 0 until jsonArray.length()) {
                                 val jsonObject = jsonArray.getJSONObject(i)
                                 val id = jsonObject.getInt("id")
-                                val userId = jsonObject.getInt("user_id")
+                                val userId = jsonObject.getInt("user_id") // Consider renaming this variable if needed
                                 val notificationText = jsonObject.getString("notification_text")
                                 val interval = jsonObject.getLong("interval")
                                 val timeUnit = jsonObject.getString("time_unit")
@@ -110,11 +115,9 @@ class AutoNotificationsFragment : Fragment() {
             }
         })
     }
-
     private fun replaceFragment(fragment: Fragment) {
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.nav_host_fragment, fragment)
-            .addToBackStack(null) // Optional: Add to back stack if you want the user to be able to navigate back
             .commit()
     }
 }
