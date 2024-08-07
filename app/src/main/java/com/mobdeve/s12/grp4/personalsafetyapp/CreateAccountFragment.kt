@@ -48,7 +48,7 @@ class CreateAccountFragment : Fragment() {
     }
 
     private fun register(fullName: String, dob: String, email: String, password: String) {
-        val url = "http://192.168.254.128/mobdeve/register.php" // Use 10.0.2.2 for localhost in Android emulator
+        val url = "http://192.168.1.21/mobdeve/register.php" // Use 10.0.2.2 for localhost in Android emulator
 
         val formBody = FormBody.Builder()
             .add("full_name", fullName)

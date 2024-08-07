@@ -6,24 +6,25 @@
     tools:context=".AlertSentActivity">
 
     <TextView
-        android:id="@+id/alert_sent_text"
+        android:id="@+id/confirmation_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
-        android:text="ALERT SENT!"
-        android:background="@drawable/text_border"
+        android:text="Alert Sent Successfully!"
         android:textColor="#000000"
-        android:textSize="24sp" />
+        android:background="@drawable/text_border"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/btn_back"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/alert_sent_text"
+        android:text="Back"
+        android:layout_below="@id/confirmation_text"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:background="#C0C0C0"
-        android:text="Back"
-        android:textColor="#000000" />
+        android:backgroundTint="#FF0000"
+        android:textColor="#000000"
+        android:textSize="18sp" />
 </RelativeLayout>

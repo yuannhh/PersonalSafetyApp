@@ -1,22 +1,27 @@
 <?php
 include 'db_connect.php';
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+header('Content-Type: application/json');
+
+$id = $_POST['id'] ?? 0;
+$contact_name = $_POST['contact_name'] ?? '';
+$contact_phone = $_POST['contact_phone'] ?? '';
+
+if ($id == 0 || empty($contact_name) || empty($contact_phone)) {
+    echo json_encode(['success' => false, 'message' => 'Invalid input']);
+    exit;
 }
 
-$id = $_POST['id'];
-$name = $_POST['name'];
-$phone_number = $_POST['phone_number'];
+$sql = "UPDATE emergency_contacts SET contact_name = ?, contact_phone = ? WHERE id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("ssi", $contact_name, $contact_phone, $id);
 
-$sql = "UPDATE emergency_contacts SET name='$name', phone_number='$phone_number' WHERE id=$id";
-
-if ($conn->query($sql) === TRUE) {
-    echo "Record updated successfully";
+if ($stmt->execute()) {
+    echo json_encode(['success' => true]);
 } else {
-    echo "Error updating record: " . $conn->error;
+    echo json_encode(['success' => false, 'message' => 'Failed to update contact']);
 }
 
 $conn->close();
 ?>
+

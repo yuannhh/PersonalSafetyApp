@@ -28,5 +28,7 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".AlertConfirmationActivity" android:exported="true" />
+        <activity android:name=".AlertSentActivity" android:exported="true" />
     </application>
 </manifest>
