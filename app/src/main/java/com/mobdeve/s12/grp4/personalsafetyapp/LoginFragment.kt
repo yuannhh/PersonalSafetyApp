@@ -17,21 +17,20 @@ import java.io.IOException
 class LoginFragment : Fragment() {
 
     private val client = OkHttpClient()
-    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var sharedPref: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.login, container, false)
-
-        sharedPreferences = requireActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
 
         val emailEditText: EditText = view.findViewById(R.id.emailEditText)
         val passwordEditText: EditText = view.findViewById(R.id.passwordEditText)
         val loginButton: Button = view.findViewById(R.id.loginButton)
         val registerButton: Button = view.findViewById(R.id.registerButton)
+
+        sharedPref = requireActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
 
         loginButton.setOnClickListener {
             val email = emailEditText.text.toString()
@@ -40,7 +39,6 @@ class LoginFragment : Fragment() {
         }
 
         registerButton.setOnClickListener {
-            // Navigate to CreateAccountFragment
             requireActivity().supportFragmentManager.beginTransaction()
                 .replace(R.id.nav_host_fragment, CreateAccountFragment())
                 .addToBackStack(null)
@@ -81,12 +79,13 @@ class LoginFragment : Fragment() {
                                 if (parts.size == 2) {
                                     try {
                                         val userId = parts[1].toInt()
-                                        val editor = sharedPreferences.edit()
-                                        editor.putInt("user_id", userId)
-                                        editor.apply()
-
-                                        Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
-                                        (activity as MainActivity).onLoginSuccess()
+                                        // Save userId in SharedPreferences
+                                        with(sharedPref.edit()) {
+                                            putInt("userId", userId)
+                                            apply()
+                                        }
+                                        // Notify MainActivity with user_id
+                                        (activity as? MainActivity)?.onLoginSuccess()
                                     } catch (e: NumberFormatException) {
                                         Toast.makeText(context, "An unknown error occurred", Toast.LENGTH_SHORT).show()
                                     }

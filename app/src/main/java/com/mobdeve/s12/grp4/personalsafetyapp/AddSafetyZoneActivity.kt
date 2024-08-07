@@ -1,7 +1,6 @@
 package com.mobdeve.s12.grp4.personalsafetyapp
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,7 +21,6 @@ class AddSafetyZoneActivity : Fragment() {
     private lateinit var countryEditText: EditText
     private lateinit var addButton: Button
     private val client = OkHttpClient()
-    private lateinit var sharedPref: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,25 +40,53 @@ class AddSafetyZoneActivity : Fragment() {
         countryEditText = view.findViewById(R.id.countryEditText)
         addButton = view.findViewById(R.id.addButton)
 
-        // Initialize SharedPreferences
-        sharedPref = requireActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+        // Fetch user ID from server
+        fetchUserId { userId ->
+            if (userId != null) {
+                addButton.setOnClickListener {
+                    val name = nameEditText.text.toString()
+                    val addressLine = addressLineEditText.text.toString()
+                    val city = cityEditText.text.toString()
+                    val state = stateEditText.text.toString()
+                    val country = countryEditText.text.toString()
 
-        addButton.setOnClickListener {
-            val name = nameEditText.text.toString()
-            val addressLine = addressLineEditText.text.toString()
-            val city = cityEditText.text.toString()
-            val state = stateEditText.text.toString()
-            val country = countryEditText.text.toString()
+                    addSafetyZone(userId, name, addressLine, city, state, country)
+                }
+            } else {
+                Toast.makeText(requireContext(), "Failed to fetch user ID", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 
-            val userId = sharedPref.getInt("userId", -1)
+    private fun fetchUserId(callback: (Int?) -> Unit) {
+        val url = "http://192.168.254.128/mobdeve/get_user_id.php"
 
-            if (userId == -1) {
-                Toast.makeText(requireContext(), "User not logged in", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
+        val request = Request.Builder()
+            .url(url)
+            .get()
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                requireActivity().runOnUiThread {
+                    Toast.makeText(requireContext(), "Failed to fetch user ID", Toast.LENGTH_SHORT).show()
+                    callback(null)
+                }
             }
 
-            addSafetyZone(userId, name, addressLine, city, state, country)
-        }
+            override fun onResponse(call: Call, response: Response) {
+                requireActivity().runOnUiThread {
+                    if (response.isSuccessful) {
+                        val responseData = response.body?.string()
+                        val userId = responseData?.toIntOrNull()
+                        callback(userId)
+                    } else {
+                        Toast.makeText(requireContext(), "Error: ${response.message}", Toast.LENGTH_SHORT).show()
+                        callback(null)
+                    }
+                }
+            }
+        })
     }
 
     private fun addSafetyZone(userId: Int, name: String, addressLine: String, city: String, state: String, country: String) {

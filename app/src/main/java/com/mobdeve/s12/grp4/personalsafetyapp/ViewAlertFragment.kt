@@ -53,9 +53,7 @@ class ViewAlertFragment : Fragment() {
         fetchAlerts(userId)
 
         binding.viewIncidentButton.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.nav_host_fragment, ViewIncidentFragment())
-                .commit()
+            replaceFragment(ViewIncidentFragment())
         }
 
         binding.clearHistoryButton.setOnClickListener {
@@ -63,9 +61,7 @@ class ViewAlertFragment : Fragment() {
         }
 
         binding.imageButton2.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.nav_host_fragment, SafetyStatusFragment())
-                .commit()
+            replaceFragment(SafetyStatusFragment())
         }
     }
 
@@ -177,5 +173,11 @@ class ViewAlertFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.nav_host_fragment, fragment)
+            .commit()
     }
 }

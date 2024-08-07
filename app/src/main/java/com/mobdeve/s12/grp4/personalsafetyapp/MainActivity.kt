@@ -1,6 +1,7 @@
 package com.mobdeve.s12.grp4.personalsafetyapp
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -25,6 +26,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onLoginSuccess() {
+        Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show()
+
         // Show BottomNavigationView and set up navigation
         bottomNavigationView.visibility = BottomNavigationView.VISIBLE
         setupBottomNavigation()
